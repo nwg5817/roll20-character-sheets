@@ -96,17 +96,17 @@
 					<td><button type="roll" name="roll_CHACheck" value="&{template:skill} {{name=Charisma}} {{skill=[[ 1d20+@{CHA|max}[CHA]+@{CT}[CT]]]}}" title="Roll Charisma %{CHACheck}"></button></td>
 				</tr>
 			</table>		
-		</div>
+		</div>		
 		<div class="col">
 			<table>		
 				<tr>	<td colspan="3"><div class="textHead"><span data-i18n="hit-points">Hit Points</span></div> </td>	
 						<td></td> 	
 						<td width="15px" rowspan="7"></td>	
-						<td><div class="textHead"><span data-i18n="condition">Condition</span></div></td>	</tr>
+						<td><div class="textHead" style="text-align:left;position: relative;left: 10px;><span data-i18n="condition">Condition</span></div></td>	</tr>
 				<tr><th>Current</th>		<th></th>	<th>Total</th>
 					<td></td>
 					<!-- rowspan placholder -->
-					<td rowspan="5" style="text-align:left">		
+					<td rowspan="5" style="text-align:left;position: relative;left: 12px;">		
 						<input type="radio" value="0" name="attr_CT" checked="true" /> <span data-i18n="ct_normal">Normal</span><br />
 						<input type="radio" value="-1" name="attr_CT" /> -1<br />
 						<input type="radio" value="-2" name="attr_CT" /> -2<br />
@@ -1866,10 +1866,10 @@
 		</div>
 		<div class="col">
 			<table>		
-				<tr>	<td colspan="3"><div class="textHead">Hit Points</div> </td>	<td colspan="3"></td>	<td><div class="textHead">Condition</div></td>	</tr>
+				<tr>	<td colspan="3"><div class="textHead">Hit Points</div> </td>	<td colspan="3"></td>	<td><div class="textHead" style="text-align:left;position: relative;left: 10px;">Condition</div></td>	</tr>
 				<tr><th>Current</th>		<th></th>	<th>Total</th>	
 					<td colspan="3"></td>
-					<td rowspan="4" style="text-align:left">		
+					<td rowspan="4" style="text-align:left;position: relative;left: 12px;">		
 						<input type="radio" value="0" name="attr_NPC-CT" checked="true" /> Normal<br />
 						<input type="radio" value="-1" name="attr_NPC-CT" /> -1<br />
 						<input type="radio" value="-2" name="attr_NPC-CT" /> -2<br />
