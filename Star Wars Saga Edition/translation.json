@@ -56,4 +56,7 @@
 "int":"INT",
 "wis":"WIS",
 "cha":"CHA",
-"flatfooted":"Flatfooted"}
+"flatfooted": "Flatfooted",
+"type-reflex": "Reflex",
+"type-fort": "Fortitude",
+"type-will": "Willpower"}

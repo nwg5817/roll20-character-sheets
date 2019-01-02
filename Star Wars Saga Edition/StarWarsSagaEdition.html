@@ -179,7 +179,7 @@
 				</div>	
 				<div class="table-row">
 					<span class="table-data">	
-						<button type="roll" name="roll_InitiativeTurn" value="&{template:skill} {{name=Rolling for Turn Order}} {{skill=[[1d20+@{Initiative}+@{InitiativeDecimal}[Dex Decimal]+?{Other Modifiers|0}[Other] &{tracker}]]}}" title="Roll Initiative to Turn Order window %{InitiativeTurn}" ></button>		
+						<button type="roll" name="roll_InitiativeTurn" value="&{template:skill} {{name=Rolling for Turn Order}} {{skill=[[1d20+@{Initiative}+@{InitiativeDecimal}[Dex Decimal] &{tracker}]]}} {{notes=@{Initiative|max}}}" title="Roll Initiative to Turn Order window %{InitiativeTurn}" ></button>		
 						<label><span data-i18n="initiative">Initiative</span></label>	 <span class="small" style="margin-left:10px;"><input type="checkbox"  value="[[0.01 * @{dex}]]" name="attr_InitiativeDecimal" title="Add Dex Score to roll as a decimal for easier sorting @{InitiativeDecimal}" checked /><span data-i18n="init_dex_decimal" class="sheet-not-sheet-show">Dex Score as Decimal</span>
 					</span>
 				</div>
@@ -195,7 +195,7 @@
 					<th><span data-i18n="misc">Misc<span></th>
 				</tr>			
 				<tr>
-					<td><button type="roll" name="roll_GrappleCheck" value="&{template:skill} {{name=Grapple}} {{skill=[[1d20+@{Grapple}+?{Other Modifiers|0}[Other]]]}}" title="Roll Grapple %{GrappleCheck}"></button></td>		
+					<td><button type="roll" name="roll_GrappleCheck" value="&{template:skill} {{name=Grapple}} {{skill=[[1d20+@{Grapple}]]}}" title="Roll Grapple %{GrappleCheck}"></button></td>		
 					<td><input type="number" name="attr_Grapple" value="@{BAB}[BAB]+@{GrpMod}[Mod]+@{GrappleSize}[Size]+@{GrpMod|max}[Misc]+@{CT}[CT]" disabled="true" title="Grapple @{Grapple}" /></td>
 					<td>&nbsp;=&nbsp;</td>
 					<td> <select name="attr_GrpMod" class="modtype" title="Choose the highest modifier @{GrpMod}">
@@ -243,10 +243,12 @@
 					</select></td>
 					<td><input type="number" name="attr_RefMisc" value="0" title="Reflex Miscellaneous Modifier @{RefMisc}" /></td>
 				</tr>
-					<input type="hidden" name="attr_dexpenalty" title="dexpenalty" value="( [[ (0-floor((@{dex|max} +0.1)/(abs(@{dex|max}+0.1) +0.001))*@{dex|max}) ]] )" disabled="true" />				
+<!-- DOP Mod --> 
+ <input type="hidden" name="attr_dexacpenalty" title="dexacpenalty" value="( [[ (0-floor((@{dex|max} +0.1)/(abs(@{dex|max}+0.1) +0.001))*@{dex|max}) ]] )" disabled="true" />
+<!-- DOP Mod -->					
 				<tr>
 					<td class="col1"><div class="small"><span data-i18n="flatfooted">Flatfooted</span></div></td>
-					<td><input type="number" name="attr_ReflexFlatFooted" value="10+@{dexpenalty}[Dex Penalty]+@{RefLevel}[Level]+@{RefClass}[Class]+@{RefFlatFootedMisc}[Misc]+@{RefSizeMod}[Size Mod]+@{CT}[CT]" disabled="true"  title="Reflex Flat Footed @{ReflexFlatFooted}" /></td>
+					<td><input type="number" name="attr_ReflexFlatFooted" value="10+@{dexacpenalty}[Dex Penalty]+@{RefLevel}[Level]+@{RefClass}[Class]+@{RefFlatFootedMisc}[Misc]+@{RefSizeMod}[Size Mod]+@{CT}[CT]" disabled="true"  title="Reflex Flat Footed @{ReflexFlatFooted}" /></td>
 					<td></td>
 					<td colspan="2" align="right">
 						<input type="number" value="0" name="attr_RefSizeMod" class="hidden" />
@@ -383,7 +385,7 @@
 								<span class="small"><b>Attack Modifier Total Formula</b></span>	<br />
 								<textarea type="text" name="attr_AttackTotal" class="atkFormula" title="Attack Total formula @{repeating_attack_X_AttackTotal}" >@{BAB}[BAB] + @{attackMod}[Mod] + @{attackModMisc}[Misc] +@{CT}[CT] +@{ArmorType|max}[Armor Penalty] </textarea> 							
 								<span class="small"><b>Attack Roll Formula</b></span>	<br />
-								<textarea type="text" name="attr_WeaponAttack" class="atkFormula" title="Attack formula @{repeating_attack_X_WeaponAttack}" >1d20cs>@{WeaponCrit}[Critical Range] + @{attackTotal} + ?{Other Modifiers (Attack)|0}[Other]</textarea> 
+								<textarea type="text" name="attr_WeaponAttack" class="atkFormula" title="Attack formula @{repeating_attack_X_WeaponAttack}" >1d20cs>@{WeaponCrit}[Critical Range] + @{attackTotal}</textarea> 
 							</span>
 						</div>
 					</div>				
@@ -427,6 +429,20 @@
 						<span class="table-data">	<div class="table">	
 							<div class="table-row">
 								<span class="table-data" style="min-width:44px">		</span>
+								<span class="table-data" style="min-width:110px">	<b>Target Defense</b>	</span>
+									<span class="table-data">	<select name="attr_targetd" style="width:100%" title="Target Defense @{repeating_attack_X_targetd}">									
+										<option value="[[@{target|Reflex}]]" data-i18n="type-reflex">Reflex</option>                
+										<option value="[[@{target|fortitude}]]" data-i18n="type-fort">Fortitude</option>
+										<option value="[[@{target|will}]]" data-i18n="type-will">Willpower</option>
+										<option value="" selected>None</option>										
+									</select>	</span> 
+							</div>
+						</div>	</span>
+					</div>									
+					<div class="table-row  sectAttack">
+						<span class="table-data">	<div class="table">	
+							<div class="table-row">
+								<span class="table-data" style="min-width:44px">		</span>
 								<span class="table-data" style="min-width:110px">	<b>Critical Info</b>	</span>
 								<span class="table-data">	<span class="small"><b>Range</b></span> 	<input type="number" name="attr_WeaponCrit" placeholder="Crit" value="20" title="Weapon Critical Starting Range ie.20 @{repeating_attack_X_WeaponCrit}" />	</span>
 								<span class="table-data">		<span class="small"><b>Multiplier</b></span>	 <input type="number" name="attr_WeaponCrit_max" value="2" title="Weapon Crit Damage Multiplier @{repeating_attack_X_WeaponCrit|max}" />		</span>
@@ -440,7 +456,7 @@
 							<span class="table-data" style="width:44px">		</span> 
 							<span class="table-data atkFormula">							
 								<span class="small"><b>Template Formula</b></span>	<br />						
-								<textarea type="text" name="attr_AttackFormula" class="atkFormula" title="Attack Template formula @{repeating_attack_X_AttackFormula}" >&{template:attack} {{name=@{WeaponName}}} {{type=@{WeaponName|max}}}  {{atkeffect=@{WeaponNotes|max}}} {{attack=[[@{WeaponAttack}]]}} {{damage=[[@{WeaponDamage}]]}} {{dmgcrit=[[(@{WeaponDamage})*@{WeaponCrit|max}[Critical Multiplier]]]}}</textarea> 
+								<textarea type="text" name="attr_AttackFormula" class="atkFormula" title="Attack Template formula @{repeating_attack_X_AttackFormula}" >&{template:attack} {{name=@{WeaponName}}} {{type=@{WeaponName|max}}}  {{atkeffect=@{WeaponNotes|max}}} {{attack=[[@{WeaponAttack}]] @{targetd}}} {{damage=[[@{WeaponDamage}]]}} {{dmgcrit=[[(@{WeaponDamage})*@{WeaponCrit|max}[Critical Multiplier]]]}}</textarea> 
 							</span>
 						</div>	</span>
 					</div>
@@ -510,7 +526,7 @@
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
 								<input type="text" name="attr_AcrobaticsFormula" class="skillFormula" title="Skill Total formula @{AcrobaticsFormula}" value="@{level|max}[Half Level]+@{AcrobaticsMod}[Mod]+@{AcrobaticsFeat}[Training]+@{AcrobaticsFeat|max}[Focus]+@{ArmorType|max}[Armor Penalty]+@{EquipmentLoad}[Heavy Load]+@{AcrobaticsMisc}[Misc]+@{CT}[CT]" /> 							
 								<span class="small"><b>Template Formula</b></span>	<br />
-								<input type="text" name="attr_AcrobaticsFormula_max" class="skillFormula" title="Skill Template formula @{AcrobaticsFormula|max}" value="&{template:skill} {{name=Acrobatics}} {{skill=[[1d20 + @{Acrobatics} + ?{Other Modifiers|0}[Other]]]}} {{notes=@{Acrobatics|max}}}" />
+								<input type="text" name="attr_AcrobaticsFormula_max" class="skillFormula" title="Skill Template formula @{AcrobaticsFormula|max}" value="&{template:skill} {{name=Acrobatics}} {{skill=[[1d20 + @{Acrobatics}]]}} {{notes=@{Acrobatics|max}}}" />
 							</span>
 						</div>
 					</div>	</div>
@@ -553,7 +569,7 @@
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
 								<input type="text" name="attr_ClimbFormula" class="skillFormula" title="Skill Total formula @{ClimbFormula}" value="@{level|max}[Half Level]+@{ClimbMod}[Mod]+@{ClimbFeat}[Training]+@{ClimbFeat|max}[Focus]+@{ArmorType|max}[Armor Penalty]+@{EquipmentLoad}[Heavy Load]+@{ClimbMisc}[Misc]+@{CT}[CT]" /> 
 								<span class="small"><b>Template Formula</b></span>	<br />
-								<input type="text" name="attr_ClimbFormula_max" class="skillFormula" title="Skill Template formula @{ClimbFormula|max}" value="&{template:skill} {{name=Climb}} {{skill=[[1d20 + @{Climb} + ?{Other Modifiers|0}[Other]]]}} {{notes=@{Climb|max}}}" />
+								<input type="text" name="attr_ClimbFormula_max" class="skillFormula" title="Skill Template formula @{ClimbFormula|max}" value="&{template:skill} {{name=Climb}} {{skill=[[1d20 + @{Climb}]]}} {{notes=@{Climb|max}}}" />
 							</span>
 						</div>
 					</div>	</div>
@@ -596,7 +612,7 @@
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
 								<input type="text" name="attr_DeceptionFormula" class="skillFormula" title="Skill Total formula @{DeceptionFormula}" value="@{level|max}[Half Level]+@{DeceptionMod}[Mod]+@{DeceptionFeat}[Training]+@{DeceptionFeat|max}[Focus]+@{DeceptionMisc}[Misc]+@{CT}[CT]" /> 
 								<span class="small"><b>Template Formula</b></span>	<br />		
-								<input type="text" name="attr_DeceptionFormula_max" class="skillFormula" title="Skill Template formula @{DeceptionFormula|max}" value="&{template:skill} {{name=Deception}} {{skill=[[1d20 + @{Deception} + ?{Other Modifiers|0}[Other]]]}} {{notes=@{Deception|max}}}" />
+								<input type="text" name="attr_DeceptionFormula_max" class="skillFormula" title="Skill Template formula @{DeceptionFormula|max}" value="&{template:skill} {{name=Deception}} {{skill=[[1d20 + @{Deception}]]}} {{notes=@{Deception|max}}}" />
 							</span>
 						</div>
 					</div>	</div>
@@ -639,7 +655,7 @@
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
 								<input type="text" name="attr_EnduranceFormula" class="skillFormula" title="Skill Total formula @{EnduranceFormula}" value="@{level|max}[Half Level]+@{EnduranceMod}[Mod]+@{EnduranceFeat}[Training]+@{EnduranceFeat|max}[Focus]+@{ArmorType|max}[Armor Penalty]+@{EquipmentLoad}[Heavy Load]+@{EnduranceMisc}[Misc]+@{CT}[CT]" /> 
 								<span class="small"><b>Template Formula</b></span>	<br />	
-								<input type="text" name="attr_EnduranceFormula_max" class="skillFormula" title="Skill Template formula @{EnduranceFormula|max}" value="&{template:skill} {{name=Endurance}} {{skill=[[1d20 + @{Endurance} + ?{Other Modifiers|0}[Other]]]}} {{notes=@{Endurance|max}}}" />
+								<input type="text" name="attr_EnduranceFormula_max" class="skillFormula" title="Skill Template formula @{EnduranceFormula|max}" value="&{template:skill} {{name=Endurance}} {{skill=[[1d20 + @{Endurance}]]}} {{notes=@{Endurance|max}}}" />
 							</span>
 						</div>
 					</div>	</div>
@@ -682,7 +698,7 @@
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
 								<input type="text" name="attr_GatherInformationFormula" class="skillFormula" title="Skill Total formula @{GatherInformationFormula}" value="@{level|max}[Half Level]+@{GatherInformationMod}[Mod]+@{GatherInformationFeat}[Training]+@{GatherInformationFeat|max}[Focus]+@{GatherInformationMisc}[Misc]+@{CT}[CT]" /> 
 								<span class="small"><b>Template Formula</b></span>	<br />						
-								<input type="text" name="attr_GatherInformationFormula_max" class="skillFormula" title="Skill Template formula @{GatherInformationFormula|max}" value="&{template:skill} {{name=Gather Information}} {{skill=[[1d20 + @{GatherInformation} + ?{Other Modifiers|0}[Other]]]}} {{notes=@{GatherInformation|max}}}" />
+								<input type="text" name="attr_GatherInformationFormula_max" class="skillFormula" title="Skill Template formula @{GatherInformationFormula|max}" value="&{template:skill} {{name=Gather Information}} {{skill=[[1d20 + @{GatherInformation}]]}} {{notes=@{GatherInformation|max}}}" />
 							</span>
 						</div>
 					</div>	</div>
@@ -725,7 +741,7 @@
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
 								<input type="text" name="attr_InitiativeFormula" class="skillFormula" title="Skill Total formula @{InitiativeFormula}" value="@{level|max}[Half Level]+@{InitiativeMod}[Mod]+@{InitiativeFeat}[Training]+@{InitiativeFeat|max}[Focus]+@{ArmorType|max}[Armor Penalty]+@{EquipmentLoad}[Heavy Load]+@{InitiativeMisc}[Misc]+@{CT}[CT]" /> 							
 								<span class="small"><b>Template Formula</b></span>	<br />
-								<input type="text" name="attr_InitiativeFormula_max" class="skillFormula" title="Skill Template formula @{InitiativeFormula|max}" value="&{template:skill} {{name=Initiative}} {{skill=[[1d20 + @{Initiative} + ?{Other Modifiers|0}[Other]]]}} {{notes=@{Initiative|max}}}" />
+								<input type="text" name="attr_InitiativeFormula_max" class="skillFormula" title="Skill Template formula @{InitiativeFormula|max}" value="&{template:skill} {{name=Initiative}} {{skill=[[1d20 + @{Initiative}]]}} {{notes=@{Initiative|max}}}" />
 							</span>
 						</div>
 					</div>	</div>
@@ -768,7 +784,7 @@
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
 								<input type="text" name="attr_JumpFormula" class="skillFormula" title="Skill Total formula @{JumpFormula}" value="@{level|max}[Half Level]+@{JumpMod}[Mod]+@{JumpFeat}[Training]+@{JumpFeat|max}[Focus]+@{ArmorType|max}[Armor Penalty]+@{EquipmentLoad}[Heavy Load]+@{JumpMisc}[Misc]+@{CT}[CT]" />				
 								<span class="small"><b>Template Formula</b></span>	<br />
-								<input type="text" name="attr_JumpFormula_max" class="skillFormula" title="Skill Template formula @{JumpFormula|max}" value="&{template:skill} {{name=Jump}} {{skill=[[1d20 + @{Jump} + ?{Other Modifiers|0}[Other]]]}} {{notes=@{Jump|max}}}" />
+								<input type="text" name="attr_JumpFormula_max" class="skillFormula" title="Skill Template formula @{JumpFormula|max}" value="&{template:skill} {{name=Jump}} {{skill=[[1d20 + @{Jump}]]}} {{notes=@{Jump|max}}}" />
 							</span>
 						</div>
 					</div>	</div>
@@ -813,7 +829,7 @@
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />						
 								<input type="text" name="attr_Knowledge-BureaucracyFormula" class="skillFormula" title="Skill Total formula @{Knowledge-BureaucracyFormula}" value="@{level|max}[Half Level]+@{Knowledge-BureaucracyMod}[Mod]+@{Knowledge-BureaucracyFeat}[Training]+@{Knowledge-BureaucracyFeat|max}[Focus]+@{Knowledge-BureaucracyMisc}[Misc]+@{CT}[CT]" /> 							
 								<span class="small"><b>Template Formula</b></span>	<br />
-								<input type="text" name="attr_Knowledge-BureaucracyFormula_max" class="skillFormula" title="Skill Template formula @{Knowledge-BureaucracyFormula|max}" value="&{template:skill} {{name=Knowledge (Bureaucracy)}} {{skill=[[1d20 + @{Knowledge-Bureaucracy} + ?{Other Modifiers|0}[Other]]]}} {{notes=@{Knowledge-Bureaucracy|max}}}" />
+								<input type="text" name="attr_Knowledge-BureaucracyFormula_max" class="skillFormula" title="Skill Template formula @{Knowledge-BureaucracyFormula|max}" value="&{template:skill} {{name=Knowledge (Bureaucracy)}} {{skill=[[1d20 + @{Knowledge-Bureaucracy}]]}} {{notes=@{Knowledge-Bureaucracy|max}}}" />
 							</span>
 						</div>
 					</div>	</div>
@@ -857,7 +873,7 @@
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
 								<input type="text" name="attr_Knowledge-GalacticLoreFormula" class="skillFormula" title="Skill Total formula @{Knowledge-GalacticLoreFormula}" value="@{level|max}[Half Level]+@{Knowledge-GalacticLoreMod}[Mod]+@{Knowledge-GalacticLoreFeat}[Training]+@{Knowledge-GalacticLoreFeat|max}[Focus]+@{Knowledge-GalacticLoreMisc}[Misc]+@{CT}[CT]" /> 							
 								<span class="small"><b>Template Formula</b></span>	<br />						
-								<input type="text" name="attr_Knowledge-GalacticLoreFormula_max" class="skillFormula" title="Skill Template formula @{Knowledge-GalacticLoreFormula|max}" value="&{template:skill} {{name=Knowledge (Galactic Lore)}} {{skill=[[1d20 + @{Knowledge-GalacticLore} + ?{Other Modifiers|0}[Other]]]}} {{notes=@{Knowledge-GalacticLore|max}}}" />
+								<input type="text" name="attr_Knowledge-GalacticLoreFormula_max" class="skillFormula" title="Skill Template formula @{Knowledge-GalacticLoreFormula|max}" value="&{template:skill} {{name=Knowledge (Galactic Lore)}} {{skill=[[1d20 + @{Knowledge-GalacticLore}]]}} {{notes=@{Knowledge-GalacticLore|max}}}" />
 							</span>
 						</div>
 					</div>	</div>
@@ -901,7 +917,7 @@
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />						
 								<input type="text" name="attr_Knowledge-LifeSciencesFormula" class="skillFormula" title="Skill Total formula @{Knowledge-LifeSciencesFormula}" value="@{level|max}[Half Level]+@{Knowledge-LifeSciencesMod}[Mod]+@{Knowledge-LifeSciencesFeat}[Training]+@{Knowledge-LifeSciencesFeat|max}[Focus]+@{Knowledge-LifeSciencesMisc}[Misc]+@{CT}[CT]" /> 							
 								<span class="small"><b>Template Formula</b></span>	<br />
-								<input type="text" name="attr_Knowledge-LifeSciencesFormula_max" class="skillFormula" title="Skill Template formula @{Knowledge-LifeSciencesFormula|max}" value="&{template:skill} {{name=Knowledge (Life Sciences)}} {{skill=[[1d20 + @{Knowledge-LifeSciences} + ?{Other Modifiers|0}[Other]]]}} {{notes=@{Knowledge-LifeSciences|max}}}" />
+								<input type="text" name="attr_Knowledge-LifeSciencesFormula_max" class="skillFormula" title="Skill Template formula @{Knowledge-LifeSciencesFormula|max}" value="&{template:skill} {{name=Knowledge (Life Sciences)}} {{skill=[[1d20 + @{Knowledge-LifeSciences}]]}} {{notes=@{Knowledge-LifeSciences|max}}}" />
 							</span>
 						</div>
 					</div>	</div>
@@ -945,7 +961,7 @@
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
 								<input type="text" name="attr_Knowledge-PhysicalScienceFormula" class="skillFormula" title="Skill Total formula @{Knowledge-PhysicalScienceFormula}" value="@{level|max}[Half Level]+@{Knowledge-PhysicalScienceMod}[Mod]+@{Knowledge-PhysicalScienceFeat}[Training]+@{Knowledge-PhysicalScienceFeat|max}[Focus]+@{Knowledge-PhysicalScienceMisc}[Misc]+@{CT}[CT]" /> 							
 								<span class="small"><b>Template Formula</b></span>	<br />						
-								<input type="text" name="attr_Knowledge-PhysicalScienceFormula_max" class="skillFormula" title="Skill Template formula @{Knowledge-PhysicalScienceFormula|max}" value="&{template:skill} {{name=Knowledge (Physical Science)}} {{skill=[[1d20 + @{Knowledge-PhysicalScience} + ?{Other Modifiers|0}[Other]]]}} {{notes=@{Knowledge-PhysicalScience|max}}}" />
+								<input type="text" name="attr_Knowledge-PhysicalScienceFormula_max" class="skillFormula" title="Skill Template formula @{Knowledge-PhysicalScienceFormula|max}" value="&{template:skill} {{name=Knowledge (Physical Science)}} {{skill=[[1d20 + @{Knowledge-PhysicalScience}]]}} {{notes=@{Knowledge-PhysicalScience|max}}}" />
 							</span>
 						</div>
 					</div>	</div>
@@ -989,7 +1005,7 @@
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
 								<input type="text" name="attr_Knowledge-SocialScienceFormula" class="skillFormula" title="Skill Total formula @{Knowledge-SocialScienceFormula}" value="@{level|max}[Half Level]+@{Knowledge-SocialScienceMod}[Mod]+@{Knowledge-SocialScienceFeat}[Training]+@{Knowledge-SocialScienceFeat|max}[Focus]+@{Knowledge-SocialScienceMisc}[Misc]+@{CT}[CT]" /> 
 								<span class="small"><b>Template Formula</b></span>	<br />
-								<input type="text" name="attr_Knowledge-SocialScienceFormula_max" class="skillFormula" title="Skill Template formula @{Knowledge-SocialScienceFormula|max}" value="&{template:skill} {{name=Knowledge (Social Science)}} {{skill=[[1d20 + @{Knowledge-SocialScience} + ?{Other Modifiers|0}[Other]]]}} {{notes=@{Knowledge-SocialScience|max}}}" />
+								<input type="text" name="attr_Knowledge-SocialScienceFormula_max" class="skillFormula" title="Skill Template formula @{Knowledge-SocialScienceFormula|max}" value="&{template:skill} {{name=Knowledge (Social Science)}} {{skill=[[1d20 + @{Knowledge-SocialScience}]]}} {{notes=@{Knowledge-SocialScience|max}}}" />
 							</span>
 						</div>
 					</div>	</div>
@@ -1033,7 +1049,7 @@
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
 								<input type="text" name="attr_Knowledge-TacticsFormula" class="skillFormula" title="Skill Total formula @{Knowledge-TacticsFormula}" value="@{level|max}[Half Level]+@{Knowledge-TacticsMod}[Mod]+@{Knowledge-TacticsFeat}[Training]+@{Knowledge-TacticsFeat|max}[Focus]+@{Knowledge-TacticsMisc}[Misc]+@{CT}[CT]" /> 
 								<span class="small"><b>Template Formula</b></span>	<br />
-								<input type="text" name="attr_Knowledge-TacticsFormula_max" class="skillFormula" title="Skill Template formula @{Knowledge-TacticsFormula|max}" value="&{template:skill} {{name=Knowledge (Tactics)}} {{skill=[[1d20 + @{Knowledge-Tactics} + ?{Other Modifiers|0}[Other]]]}} {{notes=@{Knowledge-Tactics|max}}}" />
+								<input type="text" name="attr_Knowledge-TacticsFormula_max" class="skillFormula" title="Skill Template formula @{Knowledge-TacticsFormula|max}" value="&{template:skill} {{name=Knowledge (Tactics)}} {{skill=[[1d20 + @{Knowledge-Tactics}]]}} {{notes=@{Knowledge-Tactics|max}}}" />
 							</span>
 						</div>
 					</div>	</div>
@@ -1077,7 +1093,7 @@
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />						
 								<input type="text" name="attr_Knowledge-TechnologyFormula" class="skillFormula" title="Skill Total formula @{Knowledge-TechnologyFormula}" value="@{level|max}[Half Level]+@{Knowledge-TechnologyMod}[Mod]+@{Knowledge-TechnologyFeat}[Training]+@{Knowledge-TechnologyFeat|max}[Focus]+@{Knowledge-TechnologyMisc}[Misc]+@{CT}[CT]" /> 
 								<span class="small"><b>Template Formula</b></span>	<br />
-								<input type="text" name="attr_Knowledge-TechnologyFormula_max" class="skillFormula" title="Skill Template formula @{Knowledge-TechnologyFormula|max}" value="&{template:skill} {{name=Knowledge (Technology)}} {{skill=[[1d20 + @{Knowledge-Technology} + ?{Other Modifiers|0}[Other]]]}} {{notes=@{Knowledge-Technology|max}}}" />
+								<input type="text" name="attr_Knowledge-TechnologyFormula_max" class="skillFormula" title="Skill Template formula @{Knowledge-TechnologyFormula|max}" value="&{template:skill} {{name=Knowledge (Technology)}} {{skill=[[1d20 + @{Knowledge-Technology}]]}} {{notes=@{Knowledge-Technology|max}}}" />
 							</span>
 						</div>
 					</div>	</div>
@@ -1121,7 +1137,7 @@
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />						
 								<input type="text" name="attr_MechanicsFormula" class="skillFormula" title="Skill Total formula @{MechanicsFormula}" value="@{level|max}[Half Level]+@{MechanicsMod}[Mod]+@{MechanicsFeat}[Training]+@{MechanicsFeat|max}[Focus]+@{MechanicsMisc}[Misc]+@{CT}[CT]" />
 								<span class="small"><b>Template Formula</b></span>	<br />
-								<input type="text" name="attr_MechanicsFormula_max" class="skillFormula" title="Skill Template formula @{MechanicsFormula|max}" value="&{template:skill} {{name=Mechanics}} {{skill=[[1d20 + @{Mechanics} + ?{Other Modifiers|0}[Other]]]}} {{notes=@{Mechanics|max}}}" />
+								<input type="text" name="attr_MechanicsFormula_max" class="skillFormula" title="Skill Template formula @{MechanicsFormula|max}" value="&{template:skill} {{name=Mechanics}} {{skill=[[1d20 + @{Mechanics}]]}} {{notes=@{Mechanics|max}}}" />
 							</span>
 						</div>
 					</div>	</div>
@@ -1164,7 +1180,7 @@
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />			
 								<input type="text" name="attr_PerceptionFormula" class="skillFormula" title="Skill Total formula @{PerceptionFormula}" value="@{level|max}[Half Level]+@{PerceptionMod}[Mod]+@{PerceptionFeat}[Training]+@{PerceptionFeat|max}[Focus]+@{PerceptionMisc}[Misc]+@{CT}[CT]" /> 
 								<span class="small"><b>Template Formula</b></span>	<br />
-								<input type="text" name="attr_PerceptionFormula_max" class="skillFormula" title="Skill Template formula @{PerceptionFormula|max}" value="&{template:skill} {{name=Perception}} {{skill=[[1d20 + @{Perception} + ?{Other Modifiers|0}[Other]]]}} {{notes=@{Perception|max}}}" />
+								<input type="text" name="attr_PerceptionFormula_max" class="skillFormula" title="Skill Template formula @{PerceptionFormula|max}" value="&{template:skill} {{name=Perception}} {{skill=[[1d20 + @{Perception}]]}} {{notes=@{Perception|max}}}" />
 							</span>
 						</div>
 					</div>	</div>
@@ -1207,7 +1223,7 @@
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />			
 								<input type="text" name="attr_PersuasionFormula" class="skillFormula" title="Skill Total formula @{PersuasionFormula}" value="@{level|max}[Half Level]+@{PersuasionMod}[Mod]+@{PersuasionFeat}[Training]+@{PersuasionFeat|max}[Focus]+@{PersuasionMisc}[Misc]+@{CT}[CT]" /> 
 								<span class="small"><b>Template Formula</b></span>	<br />
-								<input type="text" name="attr_PersuasionFormula_max" class="skillFormula" title="Skill Template formula @{PersuasionFormula|max}" value="&{template:skill} {{name=Persuasion}} {{skill=[[1d20 + @{Persuasion} + ?{Other Modifiers|0}[Other]]]}} {{notes=@{Persuasion|max}}}" />
+								<input type="text" name="attr_PersuasionFormula_max" class="skillFormula" title="Skill Template formula @{PersuasionFormula|max}" value="&{template:skill} {{name=Persuasion}} {{skill=[[1d20 + @{Persuasion}]]}} {{notes=@{Persuasion|max}}}" />
 							</span>
 						</div>
 					</div>	</div>
@@ -1250,7 +1266,7 @@
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
 								<input type="text" name="attr_PilotFormula" class="skillFormula" title="Skill Total formula @{PilotFormula}" value="@{level|max}[Half Level]+@{PilotMod}[Mod]+@{PilotFeat}[Training]+@{PilotFeat|max}[Focus]+@{PilotMisc}[Misc]+@{CT}[CT]" /> 
 								<span class="small"><b>Template Formula</b></span>	<br />
-								<input type="text" name="attr_PilotFormula_max" class="skillFormula" title="Skill Template formula @{PilotFormula|max}" value="&{template:skill} {{name=Pilot}} {{skill=[[1d20 + @{Pilot} + ?{Other Modifiers|0}[Other]]]}} {{notes=@{Pilot|max}}}" />
+								<input type="text" name="attr_PilotFormula_max" class="skillFormula" title="Skill Template formula @{PilotFormula|max}" value="&{template:skill} {{name=Pilot}} {{skill=[[1d20 + @{Pilot}]]}} {{notes=@{Pilot|max}}}" />
 							</span>
 						</div>
 					</div>	</div>
@@ -1293,7 +1309,7 @@
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
 								<input type="text" name="attr_RideFormula" class="skillFormula" title="Skill Total formula @{RideFormula}" value="@{level|max}[Half Level]+@{RideMod}[Mod]+@{RideFeat}[Training]+@{RideFeat|max}[Focus]+@{RideMisc}[Misc]+@{CT}[CT]" /> 
 								<span class="small"><b>Template Formula</b></span>	<br />						
-								<input type="text" name="attr_RideFormula_max" class="skillFormula" title="Skill Template formula @{RideFormula|max}" value="&{template:skill} {{name=Ride}} {{skill=[[1d20 + @{Ride} + ?{Other Modifiers|0}[Other]]]}} {{notes=@{Ride|max}}}" />
+								<input type="text" name="attr_RideFormula_max" class="skillFormula" title="Skill Template formula @{RideFormula|max}" value="&{template:skill} {{name=Ride}} {{skill=[[1d20 + @{Ride}]]}} {{notes=@{Ride|max}}}" />
 							</span>
 						</div>
 					</div>	</div>
@@ -1337,7 +1353,7 @@
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
 								<input type="text" name="attr_StealthFormula" class="skillFormula" title="Skill Total formula @{StealthFormula}" value="@{level|max}[Half Level]+@{StealthMod}[Mod]+@{StealthFeat}[Training]+@{StealthFeat|max}[Focus]+@{StealthSize}[Size]+@{ArmorType|max}[Armor Penalty]+@{EquipmentLoad}[Heavy Load]+@{StealthMisc}[Misc]+@{CT}[CT]" /> 
 								<span class="small"><b>Template Formula</b></span>	<br />
-								<input type="text" name="attr_StealthFormula_max" class="skillFormula" title="Skill Template formula @{StealthFormula|max}" value="&{template:skill} {{name=Stealth}} {{skill=[[1d20 + @{Stealth} + ?{Other Modifiers|0}[Other]]]}} {{notes=@{Stealth|max}}}" />
+								<input type="text" name="attr_StealthFormula_max" class="skillFormula" title="Skill Template formula @{StealthFormula|max}" value="&{template:skill} {{name=Stealth}} {{skill=[[1d20 + @{Stealth}]]}} {{notes=@{Stealth|max}}}" />
 							</span>
 						</div>
 					</div>	</div>
@@ -1380,7 +1396,7 @@
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
 								<input type="text" name="attr_SurvivalFormula" class="skillFormula" title="Skill Total formula @{SurvivalFormula}" value="@{level|max}[Half Level]+@{SurvivalMod}[Mod]+@{SurvivalFeat}[Training]+@{SurvivalFeat|max}[Focus]+@{SurvivalMisc}[Misc]+@{CT}[CT]" /> 
 								<span class="small"><b>Template Formula</b></span>	<br />		
-								<input type="text" name="attr_SurvivalFormula_max" class="skillFormula" title="Skill Template formula @{SurvivalFormula|max}" value="&{template:skill} {{name=Survival}} {{skill=[[1d20 + @{Survival} + ?{Other Modifiers|0}[Other]]]}} {{notes=@{Survival|max}}}" />
+								<input type="text" name="attr_SurvivalFormula_max" class="skillFormula" title="Skill Template formula @{SurvivalFormula|max}" value="&{template:skill} {{name=Survival}} {{skill=[[1d20 + @{Survival}]]}} {{notes=@{Survival|max}}}" />
 							</span>
 						</div>
 					</div>	</div>
@@ -1423,7 +1439,7 @@
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
 								<input type="text" name="attr_SwimFormula" class="skillFormula" title="Skill Total formula @{SwimFormula}" value="@{level|max}[Half Level]+@{SwimMod}[Mod]+@{SwimFeat}[Training]+@{SwimFeat|max}[Focus]+@{ArmorType|max}[Armor Penalty]+@{EquipmentLoad}[Heavy Load]+@{SwimMisc}[Misc]+@{CT}[CT]" /> 
 								<span class="small"><b>Template Formula</b></span>	<br />						
-								<input type="text" name="attr_SwimFormula_max" class="skillFormula" title="Skill Template formula @{SwimFormula|max}" value="&{template:skill} {{name=Swim}} {{skill=[[1d20 + @{Swim} + ?{Other Modifiers|0}[Other]]]}} {{notes=@{Swim|max}}}" />
+								<input type="text" name="attr_SwimFormula_max" class="skillFormula" title="Skill Template formula @{SwimFormula|max}" value="&{template:skill} {{name=Swim}} {{skill=[[1d20 + @{Swim}]]}} {{notes=@{Swim|max}}}" />
 							</span>
 						</div>
 					</div>	</div>
@@ -1466,7 +1482,7 @@
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
 								<input type="text" name="attr_TreatInjuryFormula" class="skillFormula" title="Skill Total formula @{TreatInjuryFormula}" value="@{level|max}[Half Level]+@{TreatInjuryMod}[Mod]+@{TreatInjuryFeat}[Training]+@{TreatInjuryFeat|max}[Focus]+@{TreatInjuryMisc}[Misc]+@{CT}[CT]" /> 
 								<span class="small"><b>Template Formula</b></span>	<br />						
-								<input type="text" name="attr_TreatInjuryFormula_max" class="skillFormula" title="Skill Template formula @{TreatInjuryFormula|max}" value="&{template:skill} {{name=Treat Injury}} {{skill=[[1d20 + @{TreatInjury} + ?{Other Modifiers|0}[Other]]]}} {{notes=@{TreatInjury|max}}}" />
+								<input type="text" name="attr_TreatInjuryFormula_max" class="skillFormula" title="Skill Template formula @{TreatInjuryFormula|max}" value="&{template:skill} {{name=Treat Injury}} {{skill=[[1d20 + @{TreatInjury}]]}} {{notes=@{TreatInjury|max}}}" />
 							</span>
 						</div>
 					</div>	</div>
@@ -1509,7 +1525,7 @@
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
 								<input type="text" name="attr_UseComputerFormula" class="skillFormula" title="Skill Total formula @{UseComputerFormula}" value="@{level|max}[Half Level]+@{UseComputerMod}[Mod]+@{UseComputerFeat}[Training]+@{UseComputerFeat|max}[Focus]+@{UseComputerMisc}[Misc]+@{CT}[CT]" /> 
 								<span class="small"><b>Template Formula</b></span>	<br />							
-								<input type="text" name="attr_UseComputerFormula_max" class="skillFormula" title="Skill Template formula @{UseComputerFormula|max}" value="&{template:skill} {{name=Use Computer}} {{skill=[[1d20 + @{UseComputer} + ?{Other Modifiers|0}[Other]]]}} {{notes=@{UseComputer|max}}}" />
+								<input type="text" name="attr_UseComputerFormula_max" class="skillFormula" title="Skill Template formula @{UseComputerFormula|max}" value="&{template:skill} {{name=Use Computer}} {{skill=[[1d20 + @{UseComputer}]]}} {{notes=@{UseComputer|max}}}" />
 							</span>
 						</div>
 					</div>	</div>
@@ -1552,7 +1568,7 @@
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
 								<input type="text" name="attr_UsetheForceFormula" class="skillFormula" title="Skill Total formula @{UsetheForceFormula}" value="@{level|max}[Half Level]+@{UsetheForceMod}[Mod]+@{UsetheForceFeat}[Training]+@{UsetheForceFeat|max}[Focus]+@{UsetheForceMisc}[Misc]+@{CT}[CT]" /> 
 								<span class="small"><b>Template Formula</b></span>	<br />
-								<input type="text" name="attr_UsetheForceFormula_max" class="skillFormula" title="Skill Template formula @{UsetheForceFormula|max}" value="&{template:skill} {{name= Use the Force}} {{skill=[[1d20 + @{UsetheForce} + ?{Other Modifiers|0}[Other]]]}} {{notes=@{UsetheForce|max}}}" />
+								<input type="text" name="attr_UsetheForceFormula_max" class="skillFormula" title="Skill Template formula @{UsetheForceFormula|max}" value="&{template:skill} {{name= Use the Force}} {{skill=[[1d20 + @{UsetheForce}]]}} {{notes=@{UsetheForce|max}}}" />
 							</span>
 						</div>
 					</div>	</div>
@@ -1868,8 +1884,8 @@
 					<td><input type="number" name="attr_NPC-DT" value="@{NPC-DamageThresholdDefense}+@{DamageThresholdMisc}[Misc]+@{DamageThresholdSize}[Size]+@{NPC-CTIgnoreDT}"  disabled="true" title="Damage Threshold" /></td>
 					<td>&nbsp;=&nbsp;</td>
 					<td><select name="attr_NPC-DamageThresholdDefense" class="modtype" title="Damage Threshold Defense">
-					  <option value="@{NPC-Fortitude}" selected>Fort</option>
-					  <option value="@{NPC-Will}">Will</option>
+					  <option value="@{Fortitude}" selected>Fort</option>
+					  <option value="@{Will}">Will</option>
 					</select></td>
 					<td><input type="number" name="attr_DamageThresholdMisc" value="0"  title="Damage Threshold Miscellaneous Modifier" /></td>
 				</tr>	
@@ -1912,10 +1928,10 @@
 				</tr>			
 			</table>
 			
-			<button type="roll" name="roll_NPC-PerceptionShort" value="&{template:skill} {{name=Perception}} {{skill=[[1d20+@{Perception}+?{Other Modifiers|0}[Other]]]}}" title="Roll Perception" ></button>
+			<button type="roll" name="roll_NPC-PerceptionShort" value="&{template:skill} {{name=Perception}} {{skill=[[1d20+@{Perception}]]}}" title="Roll Perception" ></button>
 				<label>Perception </label>		
 			<br />
-			<button type="roll" name="roll_NPC-InitiativeTurn" value="&{template:skill} {{name=Rolling for Turn Order}} {{skill=[[1d20+@{Initiative}+@{InitiativeDecimal}[Dex Decimal]+?{Other Modifiers|0}[Other] &{tracker}]]}}" title="Roll Initiative to Turn Order window %{InitiativeTurn}" ></button>		
+			<button type="roll" name="roll_NPC-InitiativeTurn" value="&{template:skill} {{name=Rolling for Turn Order}} {{skill=[[1d20+@{Initiative}+@{InitiativeDecimal}[Dex Decimal] &{tracker}]]}}" title="Roll Initiative to Turn Order window %{InitiativeTurn}" ></button>		
 				<label>Initiative</label>	 <span class="small" style="margin-left:10px;"><input type="checkbox" value="[[0.01 * @{dex}]]" name="attr_InitiativeDecimal" title="Add Dex Score to roll as a decimal for easier sorting @{InitiativeDecimal}" checked />Dex Score as Decimal
 			<table>
 					<div class="textHead">Grapple</div>
@@ -1926,7 +1942,7 @@
 					<th>Misc</th>	
 				</tr>
 				<tr>
-					<td><button type="roll" name="roll_NPC-GrappleCheck" value="&{template:skill} {{name=Grapple}} {{skill=[[1d20+@{NPC-Grapple}+?{Other Modifiers|0}[Other]]]}}" title="Roll Grapple"></button></td>
+					<td><button type="roll" name="roll_NPC-GrappleCheck" value="&{template:skill} {{name=Grapple}} {{skill=[[1d20+@{NPC-Grapple}]]}}" title="Roll Grapple"></button></td>
 					<td><input type="number" name="attr_NPC-Grapple" value="@{BAB} + @{GrpMod}[Mod] + @{GrpMod|max} + @{GrappleSize} +@{npc-ct}" disabled="true" title="Grapple" /></td>
 					<td>&nbsp;=&nbsp;</td>
 					<td> <select name="attr_GrpMod" class="modtype" title="Choose the highest modifier">
@@ -1942,41 +1958,130 @@
 	 <br />
 	<div class="2colrow">
 		<div class="col">
-			<div class="textHead">Defenses</div>
 			<table class="spacing">
+				<tr><div class="textHead2Col"><span data-i18n="defenses">Defenses</span></div></tr>
+				<thead>
+					<tr>
+						<th></th>
+						<th><span data-i18n="total">Total</span></th>
+						<th></th>
+						<th style="min-width:50px">	<span><span data-i18n="level">Level</span> /<br /><span data-i18n="armor">Armor</span></span>	</th>
+						<th><span data-i18n="class">Class</span></th>					
+						<th><span data-i18n="mod">Mod</span></th>
+						<th><span data-i18n="misc">Misc</span></th>
+					</tr>
+				</thead>	
+			  <tbody>
 				<tr>
-					<th></th>
-					<th></th>
-					<th>Total <br> after CT</th>
-					<th>Total</th>
+					<td class="col1" rowspan="2"><span data-i18n="reflex">Reflex</span></td>
+					<td><input type="number" name="attr_Reflex" value="10+@{RefMod}[Mod]+@{RefLevel}[Level]+@{RefClass}[Class]+@{RefMisc}[Misc]+@{RefSizeMod}[Size Mod]+@{CT}[CT]" disabled="true"  title="Reflex @{Reflex}" /></td> 
+					<td>&nbsp;=&nbsp;10&nbsp;+&nbsp;</td>
+					<td><input type="number" name="attr_RefLevel" value="@{RefLevel|max}"  disabled="true" title="Reflex Level / Armor bonus @{RefLevel}"/>	<input type="text" name="attr_RefLevel_max" value="@{level}" title="Reflex Level Formula @{RefLevel|max}"  class="hidden" /></td>	
+					<td><input type="number" name="attr_RefClass" value="0" title="Reflex Class bonus @{RefClass}" /></td>
+					<td> <select name="attr_RefMod" class="modtype" title="Reflex Ability Modifier (default DEX) @{RefMod}">
+					  <option value="@{str|max}" data-i18n="str">STR</option>
+					  <option value="@{dex|max}" data-i18n="dex" selected>DEX</option>					  
+					  <option value="@{ArmorDex}" data-i18n="dex_max">DEX (Max Armor)</option>
+					  <option value="@{con|max}" data-i18n="con">CON</option>
+					  <option value="@{int|max}" data-i18n="int">INT</option>
+					  <option value="@{wis|max}" data-i18n="wis">WIS</option>
+					  <option value="@{cha|max}" data-i18n="cha">CHA</option>
+					</select></td>
+					<td><input type="number" name="attr_RefMisc" value="0" title="Reflex Miscellaneous Modifier @{RefMisc}" /></td>
 				</tr>
+<!-- DOP Mod --> 
+ <input type="hidden" name="attr_dexacpenalty" title="dexacpenalty" value="( [[ (0-floor((@{dex|max} +0.1)/(abs(@{dex|max}+0.1) +0.001))*@{dex|max}) ]] )" disabled="true" />
+<!-- DOP Mod -->				
 				<tr>
-					<td class="col1" rowspan="2">Reflex</td>
+					<td class="col1"><div class="small"><span data-i18n="flatfooted">Flatfooted</span></div></td>
+<!-- DOP Mod --> 					
+					<td><input type="number" name="attr_ReflexFlatFooted" value="10+@{dexacpenalty}[Dex Penalty]+@{RefLevel}[Level]+@{RefClass}[Class]+@{RefFlatFootedMisc}[Misc]+@{RefSizeMod}[Size Mod]+@{CT}[CT]" disabled="true"  title="Reflex Flat Footed @{ReflexFlatFooted}" /></td>
+<!-- DOP Mod --> 					
 					<td></td>
-					<td><input type="number" name="attr_NPC-Reflex" value="@{RefTotal}+@{npc-ct}" disabled="true"  title="Reflex" /></td> 
-					<td><input type="text" name="attr_RefTotal" value="10+@{level}+@{Dex|max}+@{RefSizeMod}"  title="Reflex Total (You can use formulas, for example: 10+@{level|max}[Half Level]+@{Dex|max} or enter the total Defence Score)"/></td>
+					<td colspan="2" align="right">
+						<input type="number" value="0" name="attr_RefSizeMod" class="hidden" />
+					</td>
+					<td><input type="number" name="attr_RefFlatFootedMisc" value="0" title="Reflex Flat Footed Miscellaneous Modifier @{RefFlatFootedMisc}" /></td>
 				</tr>
-					<input type="hidden" name="attr_dexpenalty" title="dexpenalty" value="( [[ (0-floor((@{dex|max} +0.1)/(abs(@{dex|max}+0.1) +0.001))*@{dex|max}) ]] )" disabled="true" />				
+						
 				<tr>
-					<!-- rowspan placeholder -->
-					<td class="col1"><div class="small">Flatfooted</div></td>
-					<td><input type="number" name="attr_NPC-ReflexFlatFooted" value="@{RefTotal|max}+@{npc-ct}" disabled="true"  title="Reflex Flat Footed" /></td>					 
-					<td><input type="text" name="attr_RefTotal_max" value="10+@{level}+@{dexpenalty}+@{RefSizeMod}"  title="FlatFooted Reflex Total (You can use formulas, for example: 10+@{level} or enter the total Defence Score)"/></td>
+					<td class="col1"><span data-i18n="fortitude">Fortitude</span></td>
+					<td><input type="number" name="attr_Fortitude" value="10+@{FortMod}[Mod]+@{FortLevel}[Level]+@{FortClass}[Class]+@{FortMisc}[Misc]+@{CT}[CT]" disabled="true" title="Fortitude  @{Fortitude}" />
+					<td>&nbsp;=&nbsp;10&nbsp;+&nbsp;</td>
+					<td><input type="number" name="attr_FortLevel" value="@{FortLevel|max}"  disabled="true"  title="Fortitude Level / Armor bonus @{FortLevel}" />	<input type="text" name="attr_FortLevel_max" value="@{level}" title="Fortitude Level Formula @{FortLevel|max}" class="hidden" /></td>	
+					<td><input type="number" name="attr_FortClass" value="0" title="Fortitude Class bonus @{FortClass}" /></td>
+					<td> <select name="attr_FortMod" class="modtype " title="Fortitude Ability Modifier (default CON) @{FortMod}">
+					  <option value="@{str|max}" data-i18n="str">STR</option>
+					  <option value="@{dex|max}" data-i18n="dex">DEX</option>	
+					  <option value="@{con|max}" data-i18n="con" selected>CON</option>
+					  <option value="@{int|max}" data-i18n="int">INT</option>
+					  <option value="@{wis|max}" data-i18n="wis">WIS</option>
+					  <option value="@{cha|max}" data-i18n="cha">CHA</option>
+					</select></td>
+					<td><input type="number" name="attr_FortMisc" value="0" title="Fortitude Miscellaneous Modifier @{FortMisc}" /></td>
 				</tr>
 				<tr>
-					<td class="col1">Fortitude</td>
-					<td rowspan="2"></td>
-					<td><input type="number" name="attr_NPC-Fortitude" value="@{FortTotal}+@{npc-ct}" disabled="true" />					 
-					<td><input type="text" name="attr_FortTotal" value="10+@{level}+@{CON|max}"  title="Fortitude Total (You can use formulas, for example: 10+@{level} or enter the total Defence Score)"/></td>
+					<td class="col1"><span data-i18n="will">Will</span></td>
+					<td><input type="number" name="attr_Will" value="10+@{WillMod}[Mod]+@{WillLevel}[Level]+@{WillClass}[Class]+@{WillMisc}[Misc]+@{CT}[CT]" disabled="true" title="Will @{Will}" /></td>
+					<td>&nbsp;=&nbsp;10&nbsp;+&nbsp;</td>
+					<td><input type="number" name="attr_WillLevel" value="@{level}"  disabled="true" title="Will Level / Armor bonus @{WillLevel}"/></td>		
+					<td><input type="number" name="attr_WillClass" value="0" title="Will Class bonus @{WillClass}" /></td>
+					<td> <select name="attr_WillMod" class="modtype" title="Will Ability Modifier (default WIS) @{WillMod}">
+					  <option value="@{str|max}" data-i18n="str">STR</option>
+					  <option value="@{dex|max}" data-i18n="dex">DEX</option>	
+					  <option value="@{con|max}" data-i18n="con">CON</option>
+					  <option value="@{int|max}" data-i18n="int">INT</option>
+					  <option value="@{wis|max}" data-i18n="wis" selected>WIS</option>
+					  <option value="@{cha|max}" data-i18n="cha">CHA</option>
+					</select></td>
+					<td><input type="number" name="attr_WillMisc" value="0" title="Will Miscellaneous Modifier @{WillMisc}" /></td>
+				</tr>
+			  </tbody>
+			</table>
+			<br />			
+			<input type="checkbox" class="sect-show hidden" value="1" name="attr_armor-show" /> 		
+			<table class="spacing sect table2col">
+				<tr colspan="7">	<div class="textHead2Col">Armor&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="sect-show" title="Show/Hide Armor Section" name="attr_armor-show" value="1" style="opacity:0;width: 35px;height: 16px;position: relative;top: 5px;left: 6px;margin: -32px;cursor: pointer;z-index: 1;" /><span></span></div></tr>
+				<tr>	
+					<th width="50%" colspan="3">Armor Worn <input type="checkbox" value="1" name="attr_ArmorWornCheck" title="Armor equiped @{ArmorWornCheck}" /></th>		
+					<th class="small">Ref Def<br />Bonus</th>		
+					<th class="small">Fort Def<br />Bonus</th>		
+					<th class="small">Max Dex<br />Bonus</th>		
+					<th>Speed</th>		</tr>
+				<tr>
+					<td colspan="3"><input type="text" name="attr_ArmorWorn" style="width:100%" title="Armor Name @{ArmorWorn}" /></td>
+					<td><input type="number" name="attr_ArmorRef" value="0"  title="Armor Reflex Defense Bonus @{ArmorRef}" /></td>
+					<td><input type="number" name="attr_ArmorFort" value="0" title="Armor Fortitude Defense Bonus @{ArmorFort}"  /></td>
+					<td><input type="number" name="attr_ArmorDex" value="0"  title="Armor Max DEX @{ArmorDex}" /></td>
+					<td><input type="number" name="attr_Speed_max" value="0" title="Armor Max Speed @{Speed|max}"  /></td>
 				</tr>
 				<tr>
-					<td class="col1">Will</td>					
-					<!-- rowspan placeholder -->
-					<td><input type="number" name="attr_NPC-Will" value="@{WillTotal}+@{npc-ct}" disabled="true" /></td>					 
-					<td><input type="text" name="attr_WillTotal" value="10+@{level}+@{Wis|max}"  title="Will Total (You can use formulas, for example: 10+@{level} or enter the total Defence Score)"/></td>
+					<th class="small">Proficiency<br /><input type="checkbox" value="1" name="attr_ArmorProf" title="Proficient in armor worn @{ArmorProf}" /></th>
+					<th class="small">Armor Def.<br /><input type="checkbox" value="1" name="attr_ArmorDefense" title="Armor Specialist: Armor Defense @{ArmorDefense}" /></th>				
+					<th class="small">Improved<br />Armor Def.<br /><input type="checkbox" value="1" name="attr_ImpArmorDefense" title="Armor Specialist: Improved Armor Defense @{ArmorDefense}" /></th>
+					<th class="small" colspan="2">Armor Type<br/>
+						<select name="attr_ArmorType" style="width:90px" title="Armor Type @{ArmorType}">           
+							  <option value="Light">Light</option>
+							  <option value="Medium">Medium</option>
+							  <option value="Heavy">Heavy</option>
+						</select>
+						<input type="number" name="attr_ArmorType_max" value="0" class="hidden" title="Armor Penalty @{ArmorType|max}"  /> </th>
+					<th class="small" colspan="2">Helmet Package<br/>
+						<select name="attr_ArmorPerception" style="width:90px" title="Helmet Package Perception bonus @{ArmorPerception}">           
+						  <option value="None" selected>None</option>
+						  <option value="Standard">Standard</option>
+						  <option value="Superior">Superior</option>
+					</select></th>
+				</tr>	
+				<tr>	
+					
+				</tr>
+				<tr>		
+					<td colspan="7"><textarea type="text" name="attr_ArmorNotes" class="atkNotes" title="Armor Notes @{ArmorNotes}"  placeholder="Armor Notes"></textarea></td>
 				</tr>
 			</table>
-		<div class="textHead2Col">Attacks</div>
+			<br />			
+			<div class="textHead2Col">Attacks</div>
 			<fieldset class="repeating_NPC-attack">	
 				<div class="table">	
 					<div class="table-row">
@@ -2038,7 +2143,7 @@
 							<span class="table-data" style="width:44px">		</span> 
 							<span class="table-data atkFormula">							
 								<span class="small"><b>Template Formula</b></span>	<br />						
-								<textarea type="text" name="attr_AttackFormula" class="atkFormula" title="Attack Template formula @{repeating_npc-attack_X_AttackFormula}" >&{template:attack} {{name=@{WeaponName}}} {{type=@{WeaponName|max}}} {{attack=[[1d20cs>@{WeaponCrit} + @{AttackTotal} + ?{Other Modifiers (Attack)|0}]]}} {{atkeffect=@{WeaponNotes|max}}} {{damage=[[@{damage}+@{damageTotal}]]}} {{dmgcrit=[[(@{damage}+@{damageTotal})*@{WeaponCrit|max}]]}}</textarea> 
+								<textarea type="text" name="attr_AttackFormula" class="atkFormula" title="Attack Template formula @{repeating_npc-attack_X_AttackFormula}" >&{template:attack} {{name=@{WeaponName}}} {{type=@{WeaponName|max}}} {{attack=[[1d20cs>@{WeaponCrit} + @{AttackTotal}]]}} {{atkeffect=@{WeaponNotes|max}}} {{damage=[[@{damage}+@{damageTotal}]]}} {{dmgcrit=[[(@{damage}+@{damageTotal})*@{WeaponCrit|max}]]}}</textarea> 
 							</span>
 						</div>	</span>
 					</div>
@@ -2107,7 +2212,7 @@
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
 								<textarea type="text" name="attr_InitiativeFormula" class="atkFormula" title="Skill Total formula @{InitiativeFormula}" >@{level|max}[Half Level]+@{InitiativeMod}[Mod]+@{InitiativeFeat}[Training]+@{InitiativeFeat|max}[Focus]+@{ArmorType|max}[Armor Penalty]+@{EquipmentLoad}[Heavy Load]+@{InitiativeMisc}[Misc]+@{CT}[CT]</textarea> 							
 								<span class="small"><b>Template Formula</b></span>	<br />
-								<textarea type="text" name="attr_InitiativeFormula_max" class="atkFormula" title="Skill Template formula @{InitiativeFormula|max}" >&{template:skill} {{name=Initiative}} {{skill=[[1d20 + @{Initiative} + ?{Other Modifiers|0}[Other]]]}}  {{notes=@{Initiative|max}}}</textarea> 
+								<textarea type="text" name="attr_InitiativeFormula_max" class="atkFormula" title="Skill Template formula @{InitiativeFormula|max}" >&{template:skill} {{name=Initiative}} {{skill=[[1d20 + @{Initiative}]]}} {{notes=@{Initiative|max}}} </textarea> 
 							</span>
 						</div>
 					</div>	</div>
@@ -2150,7 +2255,7 @@
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
 								<textarea type="text" name="attr_PerceptionFormula" class="atkFormula" title="Skill Total formula @{PerceptionFormula}" >@{level|max}[Half Level]+@{PerceptionMod}[Mod]+@{PerceptionFeat}[Training]+@{PerceptionFeat|max}[Focus]+@{PerceptionMisc}[Misc]+@{CT}[CT]</textarea> 
 								<span class="small"><b>Template Formula</b></span>	<br />
-								<textarea type="text" name="attr_PerceptionFormula_max" class="atkFormula" title="Skill Template formula @{PerceptionFormula|max}" >&{template:skill} {{name=Perception}} {{skill=[[1d20 + @{Perception} + ?{Other Modifiers|0}[Other]]]}}  {{notes=@{Perception|max}}}</textarea> 
+								<textarea type="text" name="attr_PerceptionFormula_max" class="atkFormula" title="Skill Template formula @{PerceptionFormula|max}" >&{template:skill} {{name=Perception}} {{skill=[[1d20 + @{Perception}]]}} {{notes=@{perception|max}}}</textarea> 
 							</span>
 						</div>
 					</div>	</div>
@@ -2193,7 +2298,7 @@
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
 								<textarea type="text" name="attr_PilotFormula" class="atkFormula" title="Skill Total formula @{PilotFormula}" >@{level|max}[Half Level]+@{PilotMod}[Mod]+@{PilotFeat}[Training]+@{PilotFeat|max}[Focus]+@{PilotMisc}[Misc]+@{CT}[CT]</textarea> 
 								<span class="small"><b>Template Formula</b></span>	<br />
-								<textarea type="text" name="attr_PilotFormula_max" class="atkFormula" title="Skill Template formula @{PilotFormula|max}" >&{template:skill} {{name=Pilot}} {{skill=[[1d20 + @{Pilot} + ?{Other Modifiers|0}[Other]]]}} {{notes=@{Pilot|max}}}</textarea> 
+								<textarea type="text" name="attr_PilotFormula_max" class="atkFormula" title="Skill Template formula @{PilotFormula|max}" >&{template:skill} {{name=Pilot}} {{skill=[[1d20 + @{Pilot}]]}}  {{notes=@{Pilot|max}}}</textarea> 
 							</span>
 						</div>
 					</div>	</div>
@@ -2236,7 +2341,7 @@
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
 								<textarea type="text" name="attr_StealthFormula" class="atkFormula" title="Skill Total formula @{StealthFormula}" >@{level|max}[Half Level]+@{StealthMod}[Mod]+@{StealthFeat}[Training]+@{StealthFeat|max}[Focus]+@{StealthSize}[Size]+@{ArmorType|max}[Armor Penalty]+@{EquipmentLoad}[Heavy Load]+@{StealthMisc}[Misc]+@{CT}[CT]</textarea> 
 								<span class="small"><b>Template Formula</b></span>	<br />
-								<textarea type="text" name="attr_StealthFormula_max" class="atkFormula" title="Skill Template formula @{StealthFormula|max}" >&{template:skill} {{name=Stealth}} {{skill=[[1d20 + @{Stealth} + ?{Other Modifiers|0}[Other]]]}} {{notes=@{Stealth|max}}}</textarea> 
+								<textarea type="text" name="attr_StealthFormula_max" class="atkFormula" title="Skill Template formula @{StealthFormula|max}" >&{template:skill} {{name=Stealth}} {{skill=[[1d20 + @{Stealth}]]}} {{notes=@{Stealth|max}}}</textarea> 
 							</span>
 						</div>
 					</div>	</div>
@@ -2279,7 +2384,7 @@
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
 								<textarea type="text" name="attr_UsetheForceFormula" class="atkFormula" title="Skill Total formula @{UsetheForceFormula}" >@{level|max}[Half Level]+@{UsetheForceMod}[Mod]+@{UsetheForceFeat}[Training]+@{UsetheForceFeat|max}[Focus]+@{UsetheForceMisc}[Misc]+@{CT}[CT]</textarea> 
 								<span class="small"><b>Template Formula</b></span>	<br />
-								<textarea type="text" name="attr_UsetheForceFormula_max" class="atkFormula" title="Skill Template formula @{UsetheForceFormula|max}" >&{template:skill} {{name= Use the Force}} {{skill=[[1d20 + @{UsetheForce} + ?{Other Modifiers|0}[Other]]]}} {{notes=@{UsetheForce|max}}}</textarea> 
+								<textarea type="text" name="attr_UsetheForceFormula_max" class="atkFormula" title="Skill Template formula @{UsetheForceFormula|max}" >&{template:skill} {{name= Use the Force}} {{skill=[[1d20 + @{UsetheForce}]]}} {{notes=@{UsetheForce|max}}}</textarea> 
 							</span>
 						</div>
 					</div>	</div>
@@ -2299,7 +2404,7 @@
 							<span class="small" style="margin-left:10%;"><b>Skill Total Formula</b></span>	<br />
 							<input type="text" style="margin-left:10%; width:90%;" name="attr_skill_max" value="@{str|max}+@{level|max}[Half Level]" title="Skill Total (Can Include formula, for example: (@{str|max}+@{level|max}[Half Level]+5+5) or enter the total) " /> <br />
 							<span class="small" style="margin-left:10%;"><b>Skill Roll Formula</b></span>	<br />
-							<!-- Skill Formula -->	<textarea type="text" name="attr_Formula" class="atkFormula" style="margin-left:10%; width:90%;" title="Skill Template formula" >&{template:skill} {{name=@{Skill}}} {{skill=[[1d20+@{SkillTotal}+?{Other Modifiers|0}[Other]]]}}</textarea>	
+							<!-- Skill Formula -->	<textarea type="text" name="attr_Formula" class="atkFormula" style="margin-left:10%; width:90%;" title="Skill Template formula" >&{template:skill} {{name=@{Skill}}} {{skill=[[1d20+@{SkillTotal}]]}}</textarea>	
 						</div>	</td>
 					</tr>
 				</table>
@@ -2545,7 +2650,7 @@
 					<input type="number" name="attr_vehicle-GrpMod_max" value="0" title="Miscellaneous Grapple Modifier" /></td>
 			</tr>
 			<tr class="left">
-				<td colspan="2"><button type="roll" name="roll_vehicle-GrappleCheck" value="&{template:skill} {{name=Grapple}} {{skill=[[1d20+@{vehicle-Grapple}+?{Other Modifiers|0}[Other]]]}}" title="Roll Grapple"></button>	<label>Grapple</label></td>		
+				<td colspan="2"><button type="roll" name="roll_vehicle-GrappleCheck" value="&{template:skill} {{name=Grapple}} {{skill=[[1d20+@{vehicle-Grapple}]]}}" title="Roll Grapple"></button>	<label>Grapple</label></td>		
 				<td style="text-align:left;" colspan="3"><input type="number" name="attr_vehicle-Grapple" value="@{vehicle-BAB} + @{vehicle-GrpMod}[Mod] +@{vehicle-GrpSize} + @{vehicle-GrpMod|max} + @{vehicle-CT}" disabled="true" title="Grapple Total" /></td>
 			</tr>
 		</table>
@@ -2625,7 +2730,7 @@
 						<td>	&nbsp;+&nbsp;</td>
 						<td><input type="number" name="attr_vehicle-attackModMisc" placeholder="Misc" value="0" title="Attack Miscellaneous Modifier" /></td>
 						
-						<td rowspan="2"> <button type="roll" name="roll_vehicle-WeaponCheck" value="&{template:attack} {{name=@{vehicle-WeaponName}}} {{type=@{vehicle-WeaponName|max}}} {{atkeffect=@{vehicle-WeaponNotes|max}}} {{attack=[[1d20cs>@{WeaponCrit} + @{vehicle-AttackBAB} + @{vehicle-AttackBAB|max} + @{vehicle-int|max} + @{vehicle-attackModMisc}[Misc] + @{vehicle-CT} + ?{Other Modifiers (Attack)|0}]]}} {{damage=[[(@{vehicle-damage} + @{vehicle-damageMisc}[Misc])*@{vehicle-damage|max}]]}} {{dmgcrit=[[((@{vehicle-damage} + @{vehicle-damageMisc}[Misc])*@{vehicle-damage|max})*@{WeaponCrit|max}]]}}" title="Attack Roll"> </button>
+						<td rowspan="2"> <button type="roll" name="roll_vehicle-WeaponCheck" value="&{template:attack} {{name=@{vehicle-WeaponName}}} {{type=@{vehicle-WeaponName|max}}} {{atkeffect=@{vehicle-WeaponNotes|max}}} {{attack=[[1d20cs>@{WeaponCrit} + @{vehicle-AttackBAB} + @{vehicle-AttackBAB|max} + @{vehicle-int|max} + @{vehicle-attackModMisc}[Misc] + @{vehicle-CT}]]}} {{damage=[[(@{vehicle-damage} + @{vehicle-damageMisc}[Misc])*@{vehicle-damage|max}]]}} {{dmgcrit=[[((@{vehicle-damage} + @{vehicle-damageMisc}[Misc])*@{vehicle-damage|max})*@{WeaponCrit|max}]]}}" title="Attack Roll"> </button>
 						</td>
 					</tr>
 					<tr>					
@@ -2682,7 +2787,7 @@
 				</tr>
 				<tr>
 					<td class="skillsCrewCol1">Deception</td>
-					<td><button type="roll" name="roll_vehicle-DeceptionCheck" value="&{template:skill} {{crewname=@{vehicle-CrewName} in @{character_name}}} {{name=Deception}} {{skill=[[ 1d20+@{vehicle-Deception}+@{vehicle-CT}+?{Other Modifiers|0}[Other]]]}}" title="Roll Deception"></button></td>
+					<td><button type="roll" name="roll_vehicle-DeceptionCheck" value="&{template:skill} {{crewname=@{vehicle-CrewName} in @{character_name}}} {{name=Deception}} {{skill=[[ 1d20+@{vehicle-Deception}+@{vehicle-CT}]]}}" title="Roll Deception"></button></td>
 					<td><input type="number" name="attr_vehicle-Deception" value="@{vehicle-sizeMod}[Size]+@{vehicle-dex|max}[Dex]+[[@{vehicle-pilotmod|max}-5]][Untrained Penalty]+@{vehicle-deceptionMod}[Pilot]+@{vehicle-deceptionMisc}[Misc]" disabled="true" title="Deception Total (includes Vehicle Size Mod and Dex Mod)" />	</td>
 					<td>&nbsp;=&nbsp;</td>	
 					<td><input type="number" name="attr_vehicle-deceptionmod" value="@{vehicle-pilotMod}[Mod]" disabled="true" title="Crew Member's Pilot Check" /></td><td>&nbsp;+&nbsp;</td>
@@ -2690,7 +2795,7 @@
 				</tr>				
 				<tr>
 					<td class="skillsCrewCol1">Initiative</td>
-					<td><button type="roll" name="roll_vehicle-InitiativeCheck" value="&{template:skill} {{crewname=@{vehicle-CrewName} in @{character_name}}} {{name=Initiative}} {{skill=[[ 1d20+@{vehicle-Initiative}+@{vehicle-CT}+?{Other Modifiers|0}[Other]]]}}" title="Roll Initiative"></button></td>
+					<td><button type="roll" name="roll_vehicle-InitiativeCheck" value="&{template:skill} {{crewname=@{vehicle-CrewName} in @{character_name}}} {{name=Initiative}} {{skill=[[ 1d20+@{vehicle-Initiative}+@{vehicle-CT}]]}}" title="Roll Initiative"></button></td>
 					<td><input type="number" name="attr_vehicle-Initiative" value="@{vehicle-sizeMod}[Size]+@{vehicle-dex|max}[Dex]+@{vehicle-initiativeMod}[Pilot]+@{vehicle-initiativeMisc}[Misc]" disabled="true" title="Initiative Total (includes Vehicle Size Mod and Dex Mod)" />	</td>
 					<td>&nbsp;=&nbsp;</td>	
 					<td><input type="number" name="attr_vehicle-initiativemod" value="@{vehicle-pilotMod}[Mod]" disabled="true" title="Crew Member's Pilot Check" /></td>
@@ -2699,7 +2804,7 @@
 				</tr>
 				<tr>
 					<td class="skillsCrewCol1">Mechanics</td>
-					<td><button type="roll" name="roll_vehicle-MechanicsCheck" value="&{template:skill} {{crewname=@{vehicle-CrewName} in @{character_name}}} {{name=Mechanics}} {{skill=[[ 1d20+@{vehicle-Mechanics}+@{vehicle-CT}+?{Other Modifiers|0}[Other]]]}}" title="Roll Mechanics"></button></td>
+					<td><button type="roll" name="roll_vehicle-MechanicsCheck" value="&{template:skill} {{crewname=@{vehicle-CrewName} in @{character_name}}} {{name=Mechanics}} {{skill=[[ 1d20+@{vehicle-Mechanics}+@{vehicle-CT}]]}}" title="Roll Mechanics"></button></td>
 					<td><input type="number" name="attr_vehicle-Mechanics" value="@{vehicle-mechanicsMod}[Mechanics]+@{vehicle-mechanicsMisc}[Misc]" disabled="true" title="Mechanics Total" />	</td>
 					<td>&nbsp;=&nbsp;</td>	
 					<td><input type="number" name="attr_vehicle-mechanicsmod" value="0" title="Crew Member's Mechanics Check" /></td>
@@ -2708,7 +2813,7 @@
 				</tr>
 				<tr>
 					<td class="skillsCrewCol1">Pilot</td>
-					<td><button type="roll" name="roll_vehicle-PilotCheck" value="&{template:skill} {{crewname=@{vehicle-CrewName} in @{character_name}}} {{name=Pilot}} {{skill=[[ 1d20+@{vehicle-Pilot}+@{vehicle-CT}+?{Other Modifiers|0}[Other]]]}}" title="Roll Pilot"></button></td>
+					<td><button type="roll" name="roll_vehicle-PilotCheck" value="&{template:skill} {{crewname=@{vehicle-CrewName} in @{character_name}}} {{name=Pilot}} {{skill=[[ 1d20+@{vehicle-Pilot}+@{vehicle-CT}]]}}" title="Roll Pilot"></button></td>
 					<td><input type="number" name="attr_vehicle-pilot" value="@{vehicle-sizeMod}[Size]+@{vehicle-dex|max}[Dex]+@{vehicle-pilotMod}[Pilot]+@{vehicle-pilotMisc}[Misc]" disabled="true" title="Pilot Total (includes Vehicle Size Mod and Dex Mod)" />	</td>
 					<td>&nbsp;=&nbsp;</td>	
 					<td><input type="number" name="attr_vehicle-pilotmod" value="0" title="Crew Member's Pilot Check" /></td>
@@ -2717,7 +2822,7 @@
 				</tr>
 				<tr>
 					<td class="skillsCrewCol1">Stealth</td>
-					<td><button type="roll" name="roll_vehicle-StealthCheck" value="&{template:skill} {{crewname=@{vehicle-CrewName} in @{character_name}}} {{name=Stealth}} {{skill=[[ 1d20+@{vehicle-Stealth}+@{vehicle-CT}+?{Other Modifiers|0}[Other]]]}}" title="Roll Stealth"></button></td>
+					<td><button type="roll" name="roll_vehicle-StealthCheck" value="&{template:skill} {{crewname=@{vehicle-CrewName} in @{character_name}}} {{name=Stealth}} {{skill=[[ 1d20+@{vehicle-Stealth}+@{vehicle-CT}]]}}" title="Roll Stealth"></button></td>
 					<td><input type="number" name="attr_vehicle-Stealth" value="@{vehicle-sizeMod}[Size]+@{vehicle-dex|max}[Dex]+[[@{vehicle-pilotmod|max}-5]][Untrained Penalty]+@{vehicle-stealthMod}[Pilot]+@{vehicle-stealthMisc}[Misc]" disabled="true" title="Stealth Total (includes Vehicle Size Mod and Dex Mod)" />	</td>
 					<td>&nbsp;=&nbsp;</td>	
 					<td><input type="number" name="attr_vehicle-stealthmod" value="@{vehicle-pilotMod}[Mod]" disabled="true" title="Crew Member's Pilot Check" /></td>
@@ -2727,7 +2832,7 @@
 				</tr>
 				<tr>
 					<td class="skillsCrewCol1">Use Computer</td>
-					<td><button type="roll" name="roll_vehicle-usecomputercheck" value="&{template:skill} {{crewname=@{vehicle-CrewName} in @{character_name}}} {{name=Use Computer}} {{skill=[[ 1d20+@{vehicle-UseComputer}+@{vehicle-CT}+?{Other Modifiers|0}[Other]]]}}" title="Roll Use Computer"></button></td>
+					<td><button type="roll" name="roll_vehicle-usecomputercheck" value="&{template:skill} {{crewname=@{vehicle-CrewName} in @{character_name}}} {{name=Use Computer}} {{skill=[[ 1d20+@{vehicle-UseComputer}+@{vehicle-CT}]]}}" title="Roll Use Computer"></button></td>
 					<td><input type="number" name="attr_vehicle-usecomputer" value="@{vehicle-usecomputermod|max}[Int]+@{vehicle-usecomputerMod}[Use Computer]+@{vehicle-usecomputerMisc}[Misc]" disabled="true" title="UseComputer Total" />	</td>
 					<td>&nbsp;=&nbsp;</td>	
 					<td><input type="number" name="attr_vehicle-usecomputermod" value="0" title="Crew Member's Use Computer Check" /></td>
@@ -3728,9 +3833,11 @@ var ArmorUpdate = function() {
 	else {
 			console.log("==== Not Wearing Armor ====");
 			armorReflex = "@{level}";
-			armorFortitude = "@{level}"
+			armorFortitude = "@{level}";
 			armorPenalty = "0";
-			setAttrs({"ArmorCarry": "0"}); //Armor is not Carried
+			setAttrs({
+				"ArmorCarry": "0"
+			});		//Armor is not Carried
 		}
 
 	console.log("armorReflex = " + armorReflex + '\n' + "armorFortitude = " + armorFortitude + '\narmorPenalty = ' + armorPenalty );
@@ -3757,6 +3864,7 @@ var ArmorUpdate = function() {
 	else{console.log("== NO OPTIONS ==" + '\n' + "dexmod = " +dexMod + '\n' + "ArmorDex = " +v["ArmorDex"] + "\nRefMod = " + v["RefMod"]);}
 	}); //End 
 };
+
 
 var SizeUpdate = function() {
 	getAttrs(["Size"], function(v) {
