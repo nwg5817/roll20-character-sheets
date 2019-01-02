@@ -1909,54 +1909,70 @@
 		</div>
 		
 		<div class="col">				
-			<table>
+			<table class="spacing">
 				<tr>			
-					<td colspan="4"><div class="textHead">Force Points</div></td>			
-					<td colspan="2"><div class="textHead">Destiny Pts</div></td>
+					<td colspan="4"><div class="textHead"><span data-i18n="force_points">Force Points</span></div></td>			
+					<td colspan="2"><div class="textHead"><span data-i18n="destiny_points">Destiny Pts</span></div></td>
 				</tr>
 				<tr>
-					<td colspan="4"><input type="number" name="attr_FP" value="5" title="Current Force Points" />  
-						<button type="roll" name="roll_ForcePoint" value="&{template:skill} {{name=Force Point}} {{skill=[[@{fp|max}k1]]}} " title="Roll Force Point" ></button>
-						<input type="text" name="attr_FP_max" value="1d6" title="Force Point Dice" style="width:40px"/></td>
+					<td colspan="4"><input type="number" name="attr_FP" value="5" title="Current Force Points @{FP}" />  
+						<button type="roll" name="roll_ForcePoint" value="&{template:skill} {{name=Force Point}} {{skill=[[@{fp|max}k1]]}} " title="Roll Force Point  %{ForcePoint}" ></button>
+						<input type="text" name="attr_FP_max" value="1d6" title="Force Point Dice @{FP|max}" style="width:40px"/></td>
 					<td colspan="2"><input type="number" name="attr_DP" value="0" title="Destiny Points" /></td>						
 				</tr>
 				<tr>						
-					<td colspan="2"><div class="textHead">BAB</div></td>
-					<td colspan="2"><div class="textHead">Speed</div></td>	
-					<td colspan="2"><div class="textHead">Dark Side Pts</div></td>		
+					<td colspan="2"><div class="textHead"><span data-i18n="bab">BAB</span></div></td>
+					<td colspan="2"><div class="textHead"><span data-i18n="speed">Speed</span></div></td>	
+					<td colspan="2"><div class="textHead"><span data-i18n="dark_side_points">Dark Side Pts</span></div></td>		
 				</tr>
 				<tr>	
-					<td colspan="2"><input type="number" name="attr_BAB" value="0" title="Base Attack Bonus" /></td>
-					<td colspan="2"><input type="number" name="attr_Speed" value="0" title="Speed in Squares" /></td>	
-					<td colspan="2"><input type="number" name="attr_DSP" value="0" title="Dark Side Points" /> </td>
+					<td colspan="2"><input type="number" name="attr_BAB" value="0" title="Base Attack Bonus @{BAB}" /></td>
+					<td colspan="2"><input type="number" name="attr_Speed" value="6" title="Speed in Squares @{Speed}" /></td>	
+					<td colspan="2"><input type="number" name="attr_DSP" value="0" title="Dark Side Points @{DSP}" /> </td>
 				</tr>			
 			</table>
 			
-			<button type="roll" name="roll_NPC-PerceptionShort" value="&{template:skill} {{name=Perception}} {{skill=[[1d20+@{Perception}]]}}" title="Roll Perception" ></button>
-				<label>Perception </label>		
-			<br />
-			<button type="roll" name="roll_NPC-InitiativeTurn" value="&{template:skill} {{name=Rolling for Turn Order}} {{skill=[[1d20+@{Initiative}+@{InitiativeDecimal}[Dex Decimal] &{tracker}]]}}" title="Roll Initiative to Turn Order window %{InitiativeTurn}" ></button>		
-				<label>Initiative</label>	 <span class="small" style="margin-left:10px;"><input type="checkbox" value="[[0.01 * @{dex}]]" name="attr_InitiativeDecimal" title="Add Dex Score to roll as a decimal for easier sorting @{InitiativeDecimal}" checked />Dex Score as Decimal
+			<div class="table left">			
+				<div class="table-row">
+					<span class="table-data">	
+						<button type="roll" name="roll_PerceptionCheck" value="@{PerceptionFormula|max}" title="Roll Perception  %{PerceptionCheck} "></button>
+						<label><span data-i18n="perception">Perception</span></label>
+						<input type="checkbox" class="PerceptionShow hideCheckbox" style="width:84px; margin-left:-100px;" value="1" name="attr_Perception-Show"  title="Show/Hide Perception Notes" />	
+						<br />
+						<input class="PerceptionBody" style="margin-left:50px" type="text" name="attr_Perception_max" placeholder="Senses Notes" title="Senses Notes @{Perception|max}" />	 	</span>
+					</span>	
+				</div>	
+				<div class="table-row">
+					<span class="table-data">	
+						<button type="roll" name="roll_InitiativeTurn" value="&{template:skill} {{name=Rolling for Turn Order}} {{skill=[[1d20+@{Initiative}+@{InitiativeDecimal}[Dex Decimal] &{tracker}]]}} {{notes=@{Initiative|max}}}" title="Roll Initiative to Turn Order window %{InitiativeTurn}" ></button>		
+						<label><span data-i18n="initiative">Initiative</span></label>	 <span class="small" style="margin-left:10px;"><input type="checkbox"  value="[[0.01 * @{dex}]]" name="attr_InitiativeDecimal" title="Add Dex Score to roll as a decimal for easier sorting @{InitiativeDecimal}" checked /><span data-i18n="init_dex_decimal" class="sheet-not-sheet-show">Dex Score as Decimal</span>
+					</span>
+				</div>
+			</div>
+			
 			<table>
-					<div class="textHead">Grapple</div>
-				<tr>
-					<th colspan="3"></th>				
-					<th>Mod</th>
-					<th></th>				
-					<th>Misc</th>	
+				<tr>		
+					<td colspan="6"><div class="textHead"><span data-i18n="grapple">Grapple</span></div></td>		
 				</tr>
+				<tr>		
+					<th colspan="3"></th>
+					<th><span data-i18n="mod">Mod</span></th>		
+					<th></th>
+					<th><span data-i18n="misc">Misc<span></th>
+				</tr>			
 				<tr>
-					<td><button type="roll" name="roll_NPC-GrappleCheck" value="&{template:skill} {{name=Grapple}} {{skill=[[1d20+@{NPC-Grapple}]]}}" title="Roll Grapple"></button></td>
-					<td><input type="number" name="attr_NPC-Grapple" value="@{BAB} + @{GrpMod}[Mod] + @{GrpMod|max} + @{GrappleSize} +@{npc-ct}" disabled="true" title="Grapple" /></td>
+					<td><button type="roll" name="roll_NPC-GrappleCheck" value="&{template:skill} {{name=Grapple}} {{skill=[[1d20+@{NPC-Grapple}]]}}" title="Roll Grapple %{NPC-GrappleCheck}"></button></td>		
+					<td><input type="number" name="attr_NPC-Grapple" value="@{BAB}[BAB]+@{GrpMod}[Mod]+@{GrappleSize}[Size]+@{GrpMod|max}[Misc]+@{CT}[CT]" disabled="true" title="Grapple @{Grapple}" /></td>
 					<td>&nbsp;=&nbsp;</td>
-					<td> <select name="attr_GrpMod" class="modtype" title="Choose the highest modifier">
+					<td> <select name="attr_GrpMod" class="modtype" title="Choose the highest modifier @{GrpMod}">
 					  <option value="@{str|max}" data-i18n="str">STR</option>
 					  <option value="@{dex|max}" data-i18n="dex">DEX</option>	
-					</select></td>
+					</select></td>				
 					<td>&nbsp;+&nbsp;</td>
-					<td><input type="number" name="attr_GrpMod_max" value="0" title="Miscellaneous Grapple Modifier" /></td>
-				</tr>	
+					<td><input type="number" value="0" name="attr_GrpMod_max" class="hidden" />	<input type="number" name="attr_GrpMod_max" value="0" title="Miscellaneous Grapple Modifier @{GrpMod|max}" /></td>
+				</tr>
 			</table>
+
 		</div>
 	</div>
 	 <br />
