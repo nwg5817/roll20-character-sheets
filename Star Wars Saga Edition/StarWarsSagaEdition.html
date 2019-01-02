@@ -15,8 +15,8 @@
 	<div class="table left classHeader">
 		<div class="table-row">
 			<span class="table-data long"><label data-i18n="level">Level:</label>		</span>
-			<span class="table-data">	<input type="number" name="attr_level" title="Total number of Heroic levels @{level}" value="1" /> <input type="number" name="attr_level_max" value="[[(floor((@{level}+@{nonlevel})/2))]]"  title="Half Level @{level|max}" disabled="true" /></span>
-			<span class="table-data" style="width:15px"></span>	
+			<span class="table-data">	<input type="number" name="attr_level" title="Total number of Heroic levels @{level}" value="1" /> <input type="number" name="attr_level_max" value="[[(floor((@{level})/2))]]"  title="Hero Half Level @{level|max}" disabled="true" /> <input type="hidden" name="attr_nonlevel_max" value="[[(floor((@{level}+@{nonlevel})/2))]]"  title="Half Level @{nonlevel|max}" disabled="true" /></span>
+			<span class="table-data" style="width:15px"></span>		
 			<span class="table-data"><label><span data-i18n="background">Background:</span></label>		</span>
 			<span class="table-data">	<input type="text" name="attr_background" title="Background @{Background}" class="header" /></span>
 		</div>
@@ -531,7 +531,7 @@
 							<span class="table-data" style="min-width:50px">	</span>
 							<span class="table-data skillFormula">
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
-								<input type="text" name="attr_AcrobaticsFormula" class="skillFormula" title="Skill Total formula @{AcrobaticsFormula}" value="@{level|max}[Half Level]+@{AcrobaticsMod}[Mod]+@{AcrobaticsFeat}[Training]+@{AcrobaticsFeat|max}[Focus]+@{ArmorType|max}[Armor Penalty]+@{EquipmentLoad}[Heavy Load]+@{AcrobaticsMisc}[Misc]+@{CT}[CT]" /> 							
+								<input type="text" name="attr_AcrobaticsFormula" class="skillFormula" title="Skill Total formula @{AcrobaticsFormula}" value="@{nonlevel|max}[Half Level]+@{AcrobaticsMod}[Mod]+@{AcrobaticsFeat}[Training]+@{AcrobaticsFeat|max}[Focus]+@{ArmorType|max}[Armor Penalty]+@{EquipmentLoad}[Heavy Load]+@{AcrobaticsMisc}[Misc]+@{CT}[CT]" /> 							
 								<span class="small"><b>Template Formula</b></span>	<br />
 								<input type="text" name="attr_AcrobaticsFormula_max" class="skillFormula" title="Skill Template formula @{AcrobaticsFormula|max}" value="&{template:skill} {{name=Acrobatics}} {{skill=[[1d20 + @{Acrobatics}]]}} {{notes=@{Acrobatics|max}}}" />
 							</span>
@@ -574,7 +574,7 @@
 							<span class="table-data" style="min-width:50px">	</span>
 							<span class="table-data skillFormula">							
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
-								<input type="text" name="attr_ClimbFormula" class="skillFormula" title="Skill Total formula @{ClimbFormula}" value="@{level|max}[Half Level]+@{ClimbMod}[Mod]+@{ClimbFeat}[Training]+@{ClimbFeat|max}[Focus]+@{ArmorType|max}[Armor Penalty]+@{EquipmentLoad}[Heavy Load]+@{ClimbMisc}[Misc]+@{CT}[CT]" /> 
+								<input type="text" name="attr_ClimbFormula" class="skillFormula" title="Skill Total formula @{ClimbFormula}" value="@{nonlevel|max}[Half Level]+@{ClimbMod}[Mod]+@{ClimbFeat}[Training]+@{ClimbFeat|max}[Focus]+@{ArmorType|max}[Armor Penalty]+@{EquipmentLoad}[Heavy Load]+@{ClimbMisc}[Misc]+@{CT}[CT]" /> 
 								<span class="small"><b>Template Formula</b></span>	<br />
 								<input type="text" name="attr_ClimbFormula_max" class="skillFormula" title="Skill Template formula @{ClimbFormula|max}" value="&{template:skill} {{name=Climb}} {{skill=[[1d20 + @{Climb}]]}} {{notes=@{Climb|max}}}" />
 							</span>
@@ -617,7 +617,7 @@
 							<span class="table-data" style="min-width:50px">	</span>
 							<span class="table-data skillFormula">
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
-								<input type="text" name="attr_DeceptionFormula" class="skillFormula" title="Skill Total formula @{DeceptionFormula}" value="@{level|max}[Half Level]+@{DeceptionMod}[Mod]+@{DeceptionFeat}[Training]+@{DeceptionFeat|max}[Focus]+@{DeceptionMisc}[Misc]+@{CT}[CT]" /> 
+								<input type="text" name="attr_DeceptionFormula" class="skillFormula" title="Skill Total formula @{DeceptionFormula}" value="@{nonlevel|max}[Half Level]+@{DeceptionMod}[Mod]+@{DeceptionFeat}[Training]+@{DeceptionFeat|max}[Focus]+@{DeceptionMisc}[Misc]+@{CT}[CT]" /> 
 								<span class="small"><b>Template Formula</b></span>	<br />		
 								<input type="text" name="attr_DeceptionFormula_max" class="skillFormula" title="Skill Template formula @{DeceptionFormula|max}" value="&{template:skill} {{name=Deception}} {{skill=[[1d20 + @{Deception}]]}} {{notes=@{Deception|max}}}" />
 							</span>
@@ -660,7 +660,7 @@
 							<span class="table-data" style="min-width:50px">	</span>
 							<span class="table-data skillFormula">
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
-								<input type="text" name="attr_EnduranceFormula" class="skillFormula" title="Skill Total formula @{EnduranceFormula}" value="@{level|max}[Half Level]+@{EnduranceMod}[Mod]+@{EnduranceFeat}[Training]+@{EnduranceFeat|max}[Focus]+@{ArmorType|max}[Armor Penalty]+@{EquipmentLoad}[Heavy Load]+@{EnduranceMisc}[Misc]+@{CT}[CT]" /> 
+								<input type="text" name="attr_EnduranceFormula" class="skillFormula" title="Skill Total formula @{EnduranceFormula}" value="@{nonlevel|max}[Half Level]+@{EnduranceMod}[Mod]+@{EnduranceFeat}[Training]+@{EnduranceFeat|max}[Focus]+@{ArmorType|max}[Armor Penalty]+@{EquipmentLoad}[Heavy Load]+@{EnduranceMisc}[Misc]+@{CT}[CT]" /> 
 								<span class="small"><b>Template Formula</b></span>	<br />	
 								<input type="text" name="attr_EnduranceFormula_max" class="skillFormula" title="Skill Template formula @{EnduranceFormula|max}" value="&{template:skill} {{name=Endurance}} {{skill=[[1d20 + @{Endurance}]]}} {{notes=@{Endurance|max}}}" />
 							</span>
@@ -703,7 +703,7 @@
 							<span class="table-data" style="min-width:50px">	</span>
 							<span class="table-data skillFormula">
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
-								<input type="text" name="attr_GatherInformationFormula" class="skillFormula" title="Skill Total formula @{GatherInformationFormula}" value="@{level|max}[Half Level]+@{GatherInformationMod}[Mod]+@{GatherInformationFeat}[Training]+@{GatherInformationFeat|max}[Focus]+@{GatherInformationMisc}[Misc]+@{CT}[CT]" /> 
+								<input type="text" name="attr_GatherInformationFormula" class="skillFormula" title="Skill Total formula @{GatherInformationFormula}" value="@{nonlevel|max}[Half Level]+@{GatherInformationMod}[Mod]+@{GatherInformationFeat}[Training]+@{GatherInformationFeat|max}[Focus]+@{GatherInformationMisc}[Misc]+@{CT}[CT]" /> 
 								<span class="small"><b>Template Formula</b></span>	<br />						
 								<input type="text" name="attr_GatherInformationFormula_max" class="skillFormula" title="Skill Template formula @{GatherInformationFormula|max}" value="&{template:skill} {{name=Gather Information}} {{skill=[[1d20 + @{GatherInformation}]]}} {{notes=@{GatherInformation|max}}}" />
 							</span>
@@ -746,7 +746,7 @@
 							<span class="table-data" style="min-width:50px">	</span>
 							<span class="table-data skillFormula">	
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
-								<input type="text" name="attr_InitiativeFormula" class="skillFormula" title="Skill Total formula @{InitiativeFormula}" value="@{level|max}[Half Level]+@{InitiativeMod}[Mod]+@{InitiativeFeat}[Training]+@{InitiativeFeat|max}[Focus]+@{ArmorType|max}[Armor Penalty]+@{EquipmentLoad}[Heavy Load]+@{InitiativeMisc}[Misc]+@{CT}[CT]" /> 							
+								<input type="text" name="attr_InitiativeFormula" class="skillFormula" title="Skill Total formula @{InitiativeFormula}" value="@{nonlevel|max}[Half Level]+@{InitiativeMod}[Mod]+@{InitiativeFeat}[Training]+@{InitiativeFeat|max}[Focus]+@{ArmorType|max}[Armor Penalty]+@{EquipmentLoad}[Heavy Load]+@{InitiativeMisc}[Misc]+@{CT}[CT]" /> 							
 								<span class="small"><b>Template Formula</b></span>	<br />
 								<input type="text" name="attr_InitiativeFormula_max" class="skillFormula" title="Skill Template formula @{InitiativeFormula|max}" value="&{template:skill} {{name=Initiative}} {{skill=[[1d20 + @{Initiative}]]}} {{notes=@{Initiative|max}}}" />
 							</span>
@@ -789,7 +789,7 @@
 							<span class="table-data" style="min-width:50px">	</span>
 							<span class="table-data skillFormula">
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
-								<input type="text" name="attr_JumpFormula" class="skillFormula" title="Skill Total formula @{JumpFormula}" value="@{level|max}[Half Level]+@{JumpMod}[Mod]+@{JumpFeat}[Training]+@{JumpFeat|max}[Focus]+@{ArmorType|max}[Armor Penalty]+@{EquipmentLoad}[Heavy Load]+@{JumpMisc}[Misc]+@{CT}[CT]" />				
+								<input type="text" name="attr_JumpFormula" class="skillFormula" title="Skill Total formula @{JumpFormula}" value="@{nonlevel|max}[Half Level]+@{JumpMod}[Mod]+@{JumpFeat}[Training]+@{JumpFeat|max}[Focus]+@{ArmorType|max}[Armor Penalty]+@{EquipmentLoad}[Heavy Load]+@{JumpMisc}[Misc]+@{CT}[CT]" />				
 								<span class="small"><b>Template Formula</b></span>	<br />
 								<input type="text" name="attr_JumpFormula_max" class="skillFormula" title="Skill Template formula @{JumpFormula|max}" value="&{template:skill} {{name=Jump}} {{skill=[[1d20 + @{Jump}]]}} {{notes=@{Jump|max}}}" />
 							</span>
@@ -834,7 +834,7 @@
 							<span class="table-data" style="min-width:50px">	</span>
 							<span class="table-data skillFormula">	
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />						
-								<input type="text" name="attr_Knowledge-BureaucracyFormula" class="skillFormula" title="Skill Total formula @{Knowledge-BureaucracyFormula}" value="@{level|max}[Half Level]+@{Knowledge-BureaucracyMod}[Mod]+@{Knowledge-BureaucracyFeat}[Training]+@{Knowledge-BureaucracyFeat|max}[Focus]+@{Knowledge-BureaucracyMisc}[Misc]+@{CT}[CT]" /> 							
+								<input type="text" name="attr_Knowledge-BureaucracyFormula" class="skillFormula" title="Skill Total formula @{Knowledge-BureaucracyFormula}" value="@{nonlevel|max}[Half Level]+@{Knowledge-BureaucracyMod}[Mod]+@{Knowledge-BureaucracyFeat}[Training]+@{Knowledge-BureaucracyFeat|max}[Focus]+@{Knowledge-BureaucracyMisc}[Misc]+@{CT}[CT]" /> 							
 								<span class="small"><b>Template Formula</b></span>	<br />
 								<input type="text" name="attr_Knowledge-BureaucracyFormula_max" class="skillFormula" title="Skill Template formula @{Knowledge-BureaucracyFormula|max}" value="&{template:skill} {{name=Knowledge (Bureaucracy)}} {{skill=[[1d20 + @{Knowledge-Bureaucracy}]]}} {{notes=@{Knowledge-Bureaucracy|max}}}" />
 							</span>
@@ -878,7 +878,7 @@
 							<span class="table-data" style="min-width:50px">	</span>
 							<span class="table-data skillFormula">
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
-								<input type="text" name="attr_Knowledge-GalacticLoreFormula" class="skillFormula" title="Skill Total formula @{Knowledge-GalacticLoreFormula}" value="@{level|max}[Half Level]+@{Knowledge-GalacticLoreMod}[Mod]+@{Knowledge-GalacticLoreFeat}[Training]+@{Knowledge-GalacticLoreFeat|max}[Focus]+@{Knowledge-GalacticLoreMisc}[Misc]+@{CT}[CT]" /> 							
+								<input type="text" name="attr_Knowledge-GalacticLoreFormula" class="skillFormula" title="Skill Total formula @{Knowledge-GalacticLoreFormula}" value="@{nonlevel|max}[Half Level]+@{Knowledge-GalacticLoreMod}[Mod]+@{Knowledge-GalacticLoreFeat}[Training]+@{Knowledge-GalacticLoreFeat|max}[Focus]+@{Knowledge-GalacticLoreMisc}[Misc]+@{CT}[CT]" /> 							
 								<span class="small"><b>Template Formula</b></span>	<br />						
 								<input type="text" name="attr_Knowledge-GalacticLoreFormula_max" class="skillFormula" title="Skill Template formula @{Knowledge-GalacticLoreFormula|max}" value="&{template:skill} {{name=Knowledge (Galactic Lore)}} {{skill=[[1d20 + @{Knowledge-GalacticLore}]]}} {{notes=@{Knowledge-GalacticLore|max}}}" />
 							</span>
@@ -922,7 +922,7 @@
 							<span class="table-data" style="min-width:50px">	</span>
 							<span class="table-data skillFormula">	
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />						
-								<input type="text" name="attr_Knowledge-LifeSciencesFormula" class="skillFormula" title="Skill Total formula @{Knowledge-LifeSciencesFormula}" value="@{level|max}[Half Level]+@{Knowledge-LifeSciencesMod}[Mod]+@{Knowledge-LifeSciencesFeat}[Training]+@{Knowledge-LifeSciencesFeat|max}[Focus]+@{Knowledge-LifeSciencesMisc}[Misc]+@{CT}[CT]" /> 							
+								<input type="text" name="attr_Knowledge-LifeSciencesFormula" class="skillFormula" title="Skill Total formula @{Knowledge-LifeSciencesFormula}" value="@{nonlevel|max}[Half Level]+@{Knowledge-LifeSciencesMod}[Mod]+@{Knowledge-LifeSciencesFeat}[Training]+@{Knowledge-LifeSciencesFeat|max}[Focus]+@{Knowledge-LifeSciencesMisc}[Misc]+@{CT}[CT]" /> 							
 								<span class="small"><b>Template Formula</b></span>	<br />
 								<input type="text" name="attr_Knowledge-LifeSciencesFormula_max" class="skillFormula" title="Skill Template formula @{Knowledge-LifeSciencesFormula|max}" value="&{template:skill} {{name=Knowledge (Life Sciences)}} {{skill=[[1d20 + @{Knowledge-LifeSciences}]]}} {{notes=@{Knowledge-LifeSciences|max}}}" />
 							</span>
@@ -966,7 +966,7 @@
 							<span class="table-data" style="min-width:50px">	</span>
 							<span class="table-data skillFormula">
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
-								<input type="text" name="attr_Knowledge-PhysicalScienceFormula" class="skillFormula" title="Skill Total formula @{Knowledge-PhysicalScienceFormula}" value="@{level|max}[Half Level]+@{Knowledge-PhysicalScienceMod}[Mod]+@{Knowledge-PhysicalScienceFeat}[Training]+@{Knowledge-PhysicalScienceFeat|max}[Focus]+@{Knowledge-PhysicalScienceMisc}[Misc]+@{CT}[CT]" /> 							
+								<input type="text" name="attr_Knowledge-PhysicalScienceFormula" class="skillFormula" title="Skill Total formula @{Knowledge-PhysicalScienceFormula}" value="@{nonlevel|max}[Half Level]+@{Knowledge-PhysicalScienceMod}[Mod]+@{Knowledge-PhysicalScienceFeat}[Training]+@{Knowledge-PhysicalScienceFeat|max}[Focus]+@{Knowledge-PhysicalScienceMisc}[Misc]+@{CT}[CT]" /> 							
 								<span class="small"><b>Template Formula</b></span>	<br />						
 								<input type="text" name="attr_Knowledge-PhysicalScienceFormula_max" class="skillFormula" title="Skill Template formula @{Knowledge-PhysicalScienceFormula|max}" value="&{template:skill} {{name=Knowledge (Physical Science)}} {{skill=[[1d20 + @{Knowledge-PhysicalScience}]]}} {{notes=@{Knowledge-PhysicalScience|max}}}" />
 							</span>
@@ -1010,7 +1010,7 @@
 							<span class="table-data" style="min-width:50px">	</span>
 							<span class="table-data skillFormula">							
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
-								<input type="text" name="attr_Knowledge-SocialScienceFormula" class="skillFormula" title="Skill Total formula @{Knowledge-SocialScienceFormula}" value="@{level|max}[Half Level]+@{Knowledge-SocialScienceMod}[Mod]+@{Knowledge-SocialScienceFeat}[Training]+@{Knowledge-SocialScienceFeat|max}[Focus]+@{Knowledge-SocialScienceMisc}[Misc]+@{CT}[CT]" /> 
+								<input type="text" name="attr_Knowledge-SocialScienceFormula" class="skillFormula" title="Skill Total formula @{Knowledge-SocialScienceFormula}" value="@{nonlevel|max}[Half Level]+@{Knowledge-SocialScienceMod}[Mod]+@{Knowledge-SocialScienceFeat}[Training]+@{Knowledge-SocialScienceFeat|max}[Focus]+@{Knowledge-SocialScienceMisc}[Misc]+@{CT}[CT]" /> 
 								<span class="small"><b>Template Formula</b></span>	<br />
 								<input type="text" name="attr_Knowledge-SocialScienceFormula_max" class="skillFormula" title="Skill Template formula @{Knowledge-SocialScienceFormula|max}" value="&{template:skill} {{name=Knowledge (Social Science)}} {{skill=[[1d20 + @{Knowledge-SocialScience}]]}} {{notes=@{Knowledge-SocialScience|max}}}" />
 							</span>
@@ -1054,7 +1054,7 @@
 							<span class="table-data" style="min-width:50px">	</span>
 							<span class="table-data skillFormula">
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
-								<input type="text" name="attr_Knowledge-TacticsFormula" class="skillFormula" title="Skill Total formula @{Knowledge-TacticsFormula}" value="@{level|max}[Half Level]+@{Knowledge-TacticsMod}[Mod]+@{Knowledge-TacticsFeat}[Training]+@{Knowledge-TacticsFeat|max}[Focus]+@{Knowledge-TacticsMisc}[Misc]+@{CT}[CT]" /> 
+								<input type="text" name="attr_Knowledge-TacticsFormula" class="skillFormula" title="Skill Total formula @{Knowledge-TacticsFormula}" value="@{nonlevel|max}[Half Level]+@{Knowledge-TacticsMod}[Mod]+@{Knowledge-TacticsFeat}[Training]+@{Knowledge-TacticsFeat|max}[Focus]+@{Knowledge-TacticsMisc}[Misc]+@{CT}[CT]" /> 
 								<span class="small"><b>Template Formula</b></span>	<br />
 								<input type="text" name="attr_Knowledge-TacticsFormula_max" class="skillFormula" title="Skill Template formula @{Knowledge-TacticsFormula|max}" value="&{template:skill} {{name=Knowledge (Tactics)}} {{skill=[[1d20 + @{Knowledge-Tactics}]]}} {{notes=@{Knowledge-Tactics|max}}}" />
 							</span>
@@ -1098,7 +1098,7 @@
 							<span class="table-data" style="min-width:50px">	</span>
 							<span class="table-data skillFormula">	
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />						
-								<input type="text" name="attr_Knowledge-TechnologyFormula" class="skillFormula" title="Skill Total formula @{Knowledge-TechnologyFormula}" value="@{level|max}[Half Level]+@{Knowledge-TechnologyMod}[Mod]+@{Knowledge-TechnologyFeat}[Training]+@{Knowledge-TechnologyFeat|max}[Focus]+@{Knowledge-TechnologyMisc}[Misc]+@{CT}[CT]" /> 
+								<input type="text" name="attr_Knowledge-TechnologyFormula" class="skillFormula" title="Skill Total formula @{Knowledge-TechnologyFormula}" value="@{nonlevel|max}[Half Level]+@{Knowledge-TechnologyMod}[Mod]+@{Knowledge-TechnologyFeat}[Training]+@{Knowledge-TechnologyFeat|max}[Focus]+@{Knowledge-TechnologyMisc}[Misc]+@{CT}[CT]" /> 
 								<span class="small"><b>Template Formula</b></span>	<br />
 								<input type="text" name="attr_Knowledge-TechnologyFormula_max" class="skillFormula" title="Skill Template formula @{Knowledge-TechnologyFormula|max}" value="&{template:skill} {{name=Knowledge (Technology)}} {{skill=[[1d20 + @{Knowledge-Technology}]]}} {{notes=@{Knowledge-Technology|max}}}" />
 							</span>
@@ -1142,7 +1142,7 @@
 							<span class="table-data" style="min-width:50px">	</span>
 							<span class="table-data skillFormula">	 
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />						
-								<input type="text" name="attr_MechanicsFormula" class="skillFormula" title="Skill Total formula @{MechanicsFormula}" value="@{level|max}[Half Level]+@{MechanicsMod}[Mod]+@{MechanicsFeat}[Training]+@{MechanicsFeat|max}[Focus]+@{MechanicsMisc}[Misc]+@{CT}[CT]" />
+								<input type="text" name="attr_MechanicsFormula" class="skillFormula" title="Skill Total formula @{MechanicsFormula}" value="@{nonlevel|max}[Half Level]+@{MechanicsMod}[Mod]+@{MechanicsFeat}[Training]+@{MechanicsFeat|max}[Focus]+@{MechanicsMisc}[Misc]+@{CT}[CT]" />
 								<span class="small"><b>Template Formula</b></span>	<br />
 								<input type="text" name="attr_MechanicsFormula_max" class="skillFormula" title="Skill Template formula @{MechanicsFormula|max}" value="&{template:skill} {{name=Mechanics}} {{skill=[[1d20 + @{Mechanics}]]}} {{notes=@{Mechanics|max}}}" />
 							</span>
@@ -1185,7 +1185,7 @@
 							<span class="table-data" style="min-width:50px">	</span>
 							<span class="table-data skillFormula">				
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />			
-								<input type="text" name="attr_PerceptionFormula" class="skillFormula" title="Skill Total formula @{PerceptionFormula}" value="@{level|max}[Half Level]+@{PerceptionMod}[Mod]+@{PerceptionFeat}[Training]+@{PerceptionFeat|max}[Focus]+@{PerceptionMisc}[Misc]+@{CT}[CT]" /> 
+								<input type="text" name="attr_PerceptionFormula" class="skillFormula" title="Skill Total formula @{PerceptionFormula}" value="@{nonlevel|max}[Half Level]+@{PerceptionMod}[Mod]+@{PerceptionFeat}[Training]+@{PerceptionFeat|max}[Focus]+@{PerceptionMisc}[Misc]+@{CT}[CT]" /> 
 								<span class="small"><b>Template Formula</b></span>	<br />
 								<input type="text" name="attr_PerceptionFormula_max" class="skillFormula" title="Skill Template formula @{PerceptionFormula|max}" value="&{template:skill} {{name=Perception}} {{skill=[[1d20 + @{Perception}]]}} {{notes=@{Perception|max}}}" />
 							</span>
@@ -1228,7 +1228,7 @@
 							<span class="table-data" style="min-width:50px">	</span>
 							<span class="table-data skillFormula">				
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />			
-								<input type="text" name="attr_PersuasionFormula" class="skillFormula" title="Skill Total formula @{PersuasionFormula}" value="@{level|max}[Half Level]+@{PersuasionMod}[Mod]+@{PersuasionFeat}[Training]+@{PersuasionFeat|max}[Focus]+@{PersuasionMisc}[Misc]+@{CT}[CT]" /> 
+								<input type="text" name="attr_PersuasionFormula" class="skillFormula" title="Skill Total formula @{PersuasionFormula}" value="@{nonlevel|max}[Half Level]+@{PersuasionMod}[Mod]+@{PersuasionFeat}[Training]+@{PersuasionFeat|max}[Focus]+@{PersuasionMisc}[Misc]+@{CT}[CT]" /> 
 								<span class="small"><b>Template Formula</b></span>	<br />
 								<input type="text" name="attr_PersuasionFormula_max" class="skillFormula" title="Skill Template formula @{PersuasionFormula|max}" value="&{template:skill} {{name=Persuasion}} {{skill=[[1d20 + @{Persuasion}]]}} {{notes=@{Persuasion|max}}}" />
 							</span>
@@ -1271,7 +1271,7 @@
 							<span class="table-data" style="min-width:50px">	</span>
 							<span class="table-data skillFormula">
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
-								<input type="text" name="attr_PilotFormula" class="skillFormula" title="Skill Total formula @{PilotFormula}" value="@{level|max}[Half Level]+@{PilotMod}[Mod]+@{PilotFeat}[Training]+@{PilotFeat|max}[Focus]+@{PilotMisc}[Misc]+@{CT}[CT]" /> 
+								<input type="text" name="attr_PilotFormula" class="skillFormula" title="Skill Total formula @{PilotFormula}" value="@{nonlevel|max}[Half Level]+@{PilotMod}[Mod]+@{PilotFeat}[Training]+@{PilotFeat|max}[Focus]+@{PilotMisc}[Misc]+@{CT}[CT]" /> 
 								<span class="small"><b>Template Formula</b></span>	<br />
 								<input type="text" name="attr_PilotFormula_max" class="skillFormula" title="Skill Template formula @{PilotFormula|max}" value="&{template:skill} {{name=Pilot}} {{skill=[[1d20 + @{Pilot}]]}} {{notes=@{Pilot|max}}}" />
 							</span>
@@ -1314,7 +1314,7 @@
 							<span class="table-data" style="min-width:50px">	</span>
 							<span class="table-data skillFormula">
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
-								<input type="text" name="attr_RideFormula" class="skillFormula" title="Skill Total formula @{RideFormula}" value="@{level|max}[Half Level]+@{RideMod}[Mod]+@{RideFeat}[Training]+@{RideFeat|max}[Focus]+@{RideMisc}[Misc]+@{CT}[CT]" /> 
+								<input type="text" name="attr_RideFormula" class="skillFormula" title="Skill Total formula @{RideFormula}" value="@{nonlevel|max}[Half Level]+@{RideMod}[Mod]+@{RideFeat}[Training]+@{RideFeat|max}[Focus]+@{RideMisc}[Misc]+@{CT}[CT]" /> 
 								<span class="small"><b>Template Formula</b></span>	<br />						
 								<input type="text" name="attr_RideFormula_max" class="skillFormula" title="Skill Template formula @{RideFormula|max}" value="&{template:skill} {{name=Ride}} {{skill=[[1d20 + @{Ride}]]}} {{notes=@{Ride|max}}}" />
 							</span>
@@ -1358,7 +1358,7 @@
 							<span class="table-data" style="min-width:50px">	</span>
 							<span class="table-data skillFormula">							
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
-								<input type="text" name="attr_StealthFormula" class="skillFormula" title="Skill Total formula @{StealthFormula}" value="@{level|max}[Half Level]+@{StealthMod}[Mod]+@{StealthFeat}[Training]+@{StealthFeat|max}[Focus]+@{StealthSize}[Size]+@{ArmorType|max}[Armor Penalty]+@{EquipmentLoad}[Heavy Load]+@{StealthMisc}[Misc]+@{CT}[CT]" /> 
+								<input type="text" name="attr_StealthFormula" class="skillFormula" title="Skill Total formula @{StealthFormula}" value="@{nonlevel|max}[Half Level]+@{StealthMod}[Mod]+@{StealthFeat}[Training]+@{StealthFeat|max}[Focus]+@{StealthSize}[Size]+@{ArmorType|max}[Armor Penalty]+@{EquipmentLoad}[Heavy Load]+@{StealthMisc}[Misc]+@{CT}[CT]" /> 
 								<span class="small"><b>Template Formula</b></span>	<br />
 								<input type="text" name="attr_StealthFormula_max" class="skillFormula" title="Skill Template formula @{StealthFormula|max}" value="&{template:skill} {{name=Stealth}} {{skill=[[1d20 + @{Stealth}]]}} {{notes=@{Stealth|max}}}" />
 							</span>
@@ -1401,7 +1401,7 @@
 							<span class="table-data" style="min-width:50px">	</span>
 							<span class="table-data skillFormula">							
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
-								<input type="text" name="attr_SurvivalFormula" class="skillFormula" title="Skill Total formula @{SurvivalFormula}" value="@{level|max}[Half Level]+@{SurvivalMod}[Mod]+@{SurvivalFeat}[Training]+@{SurvivalFeat|max}[Focus]+@{SurvivalMisc}[Misc]+@{CT}[CT]" /> 
+								<input type="text" name="attr_SurvivalFormula" class="skillFormula" title="Skill Total formula @{SurvivalFormula}" value="@{nonlevel|max}[Half Level]+@{SurvivalMod}[Mod]+@{SurvivalFeat}[Training]+@{SurvivalFeat|max}[Focus]+@{SurvivalMisc}[Misc]+@{CT}[CT]" /> 
 								<span class="small"><b>Template Formula</b></span>	<br />		
 								<input type="text" name="attr_SurvivalFormula_max" class="skillFormula" title="Skill Template formula @{SurvivalFormula|max}" value="&{template:skill} {{name=Survival}} {{skill=[[1d20 + @{Survival}]]}} {{notes=@{Survival|max}}}" />
 							</span>
@@ -1444,7 +1444,7 @@
 							<span class="table-data" style="min-width:50px">	</span>
 							<span class="table-data skillFormula">							
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
-								<input type="text" name="attr_SwimFormula" class="skillFormula" title="Skill Total formula @{SwimFormula}" value="@{level|max}[Half Level]+@{SwimMod}[Mod]+@{SwimFeat}[Training]+@{SwimFeat|max}[Focus]+@{ArmorType|max}[Armor Penalty]+@{EquipmentLoad}[Heavy Load]+@{SwimMisc}[Misc]+@{CT}[CT]" /> 
+								<input type="text" name="attr_SwimFormula" class="skillFormula" title="Skill Total formula @{SwimFormula}" value="@{nonlevel|max}[Half Level]+@{SwimMod}[Mod]+@{SwimFeat}[Training]+@{SwimFeat|max}[Focus]+@{ArmorType|max}[Armor Penalty]+@{EquipmentLoad}[Heavy Load]+@{SwimMisc}[Misc]+@{CT}[CT]" /> 
 								<span class="small"><b>Template Formula</b></span>	<br />						
 								<input type="text" name="attr_SwimFormula_max" class="skillFormula" title="Skill Template formula @{SwimFormula|max}" value="&{template:skill} {{name=Swim}} {{skill=[[1d20 + @{Swim}]]}} {{notes=@{Swim|max}}}" />
 							</span>
@@ -1487,7 +1487,7 @@
 							<span class="table-data" style="min-width:50px">	</span>
 							<span class="table-data skillFormula">							
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
-								<input type="text" name="attr_TreatInjuryFormula" class="skillFormula" title="Skill Total formula @{TreatInjuryFormula}" value="@{level|max}[Half Level]+@{TreatInjuryMod}[Mod]+@{TreatInjuryFeat}[Training]+@{TreatInjuryFeat|max}[Focus]+@{TreatInjuryMisc}[Misc]+@{CT}[CT]" /> 
+								<input type="text" name="attr_TreatInjuryFormula" class="skillFormula" title="Skill Total formula @{TreatInjuryFormula}" value="@{nonlevel|max}[Half Level]+@{TreatInjuryMod}[Mod]+@{TreatInjuryFeat}[Training]+@{TreatInjuryFeat|max}[Focus]+@{TreatInjuryMisc}[Misc]+@{CT}[CT]" /> 
 								<span class="small"><b>Template Formula</b></span>	<br />						
 								<input type="text" name="attr_TreatInjuryFormula_max" class="skillFormula" title="Skill Template formula @{TreatInjuryFormula|max}" value="&{template:skill} {{name=Treat Injury}} {{skill=[[1d20 + @{TreatInjury}]]}} {{notes=@{TreatInjury|max}}}" />
 							</span>
@@ -1530,7 +1530,7 @@
 							<span class="table-data" style="min-width:50px">	</span>
 							<span class="table-data skillFormula">						
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
-								<input type="text" name="attr_UseComputerFormula" class="skillFormula" title="Skill Total formula @{UseComputerFormula}" value="@{level|max}[Half Level]+@{UseComputerMod}[Mod]+@{UseComputerFeat}[Training]+@{UseComputerFeat|max}[Focus]+@{UseComputerMisc}[Misc]+@{CT}[CT]" /> 
+								<input type="text" name="attr_UseComputerFormula" class="skillFormula" title="Skill Total formula @{UseComputerFormula}" value="@{nonlevel|max}[Half Level]+@{UseComputerMod}[Mod]+@{UseComputerFeat}[Training]+@{UseComputerFeat|max}[Focus]+@{UseComputerMisc}[Misc]+@{CT}[CT]" /> 
 								<span class="small"><b>Template Formula</b></span>	<br />							
 								<input type="text" name="attr_UseComputerFormula_max" class="skillFormula" title="Skill Template formula @{UseComputerFormula|max}" value="&{template:skill} {{name=Use Computer}} {{skill=[[1d20 + @{UseComputer}]]}} {{notes=@{UseComputer|max}}}" />
 							</span>
@@ -1573,7 +1573,7 @@
 							<span class="table-data" style="min-width:50px">	</span>
 							<span class="table-data skillFormula">							
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
-								<input type="text" name="attr_UsetheForceFormula" class="skillFormula" title="Skill Total formula @{UsetheForceFormula}" value="@{level|max}[Half Level]+@{UsetheForceMod}[Mod]+@{UsetheForceFeat}[Training]+@{UsetheForceFeat|max}[Focus]+@{UsetheForceMisc}[Misc]+@{CT}[CT]" /> 
+								<input type="text" name="attr_UsetheForceFormula" class="skillFormula" title="Skill Total formula @{UsetheForceFormula}" value="@{nonlevel|max}[Half Level]+@{UsetheForceMod}[Mod]+@{UsetheForceFeat}[Training]+@{UsetheForceFeat|max}[Focus]+@{UsetheForceMisc}[Misc]+@{CT}[CT]" /> 
 								<span class="small"><b>Template Formula</b></span>	<br />
 								<input type="text" name="attr_UsetheForceFormula_max" class="skillFormula" title="Skill Template formula @{UsetheForceFormula|max}" value="&{template:skill} {{name= Use the Force}} {{skill=[[1d20 + @{UsetheForce}]]}} {{notes=@{UsetheForce|max}}}" />
 							</span>
@@ -1791,6 +1791,7 @@
 			<span class="table-data" style="width:10px"></span>
 			<span class="table-data long" style="min-width:135px"><label>Half Total Level:</label></span>	
 			<span class="table-data">     <input type="number" name="attr_level_max" value="[[(floor((@{level})/2))]]" disabled="true" class="header" title="Half total Levels"></span>
+			<span class="table-data">     <input type="hidden" name="attr_nonlevel_max" value="[[(floor((@{level}+@{nonlevel})/2))]]" disabled="true" class="header" title="Half total Levels"></span>			
 		</div>
 	</div>
 	<div class="table left classHeader">
@@ -2291,7 +2292,7 @@
 							<span class="table-data" style="min-width:50px">	</span>
 							<span class="table-data atkFormula">
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
-								<textarea type="text" name="attr_InitiativeFormula" class="atkFormula" title="Skill Total formula @{InitiativeFormula}" >@{level|max}[Half Level]+@{InitiativeMod}[Mod]+@{InitiativeFeat}[Training]+@{InitiativeFeat|max}[Focus]+@{ArmorType|max}[Armor Penalty]+@{EquipmentLoad}[Heavy Load]+@{InitiativeMisc}[Misc]+@{CT}[CT]</textarea> 							
+								<textarea type="text" name="attr_InitiativeFormula" class="atkFormula" title="Skill Total formula @{InitiativeFormula}" >@{nonlevel|max}[Half Level]+@{InitiativeMod}[Mod]+@{InitiativeFeat}[Training]+@{InitiativeFeat|max}[Focus]+@{ArmorType|max}[Armor Penalty]+@{EquipmentLoad}[Heavy Load]+@{InitiativeMisc}[Misc]+@{CT}[CT]</textarea> 							
 								<span class="small"><b>Template Formula</b></span>	<br />
 								<textarea type="text" name="attr_InitiativeFormula_max" class="atkFormula" title="Skill Template formula @{InitiativeFormula|max}" >&{template:skill} {{name=Initiative}} {{skill=[[1d20 + @{Initiative}]]}} {{notes=@{Initiative|max}}} </textarea> 
 							</span>
@@ -2334,7 +2335,7 @@
 							<span class="table-data" style="min-width:50px">	</span>
 							<span class="table-data atkFormula">							
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
-								<textarea type="text" name="attr_PerceptionFormula" class="atkFormula" title="Skill Total formula @{PerceptionFormula}" >@{level|max}[Half Level]+@{PerceptionMod}[Mod]+@{PerceptionFeat}[Training]+@{PerceptionFeat|max}[Focus]+@{PerceptionMisc}[Misc]+@{CT}[CT]</textarea> 
+								<textarea type="text" name="attr_PerceptionFormula" class="atkFormula" title="Skill Total formula @{PerceptionFormula}" >@{nonlevel|max}[Half Level]+@{PerceptionMod}[Mod]+@{PerceptionFeat}[Training]+@{PerceptionFeat|max}[Focus]+@{PerceptionMisc}[Misc]+@{CT}[CT]</textarea> 
 								<span class="small"><b>Template Formula</b></span>	<br />
 								<textarea type="text" name="attr_PerceptionFormula_max" class="atkFormula" title="Skill Template formula @{PerceptionFormula|max}" >&{template:skill} {{name=Perception}} {{skill=[[1d20 + @{Perception}]]}} {{notes=@{perception|max}}}</textarea> 
 							</span>
@@ -2377,7 +2378,7 @@
 							<span class="table-data" style="min-width:50px">	</span>
 							<span class="table-data atkFormula">							
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
-								<textarea type="text" name="attr_PilotFormula" class="atkFormula" title="Skill Total formula @{PilotFormula}" >@{level|max}[Half Level]+@{PilotMod}[Mod]+@{PilotFeat}[Training]+@{PilotFeat|max}[Focus]+@{PilotMisc}[Misc]+@{CT}[CT]</textarea> 
+								<textarea type="text" name="attr_PilotFormula" class="atkFormula" title="Skill Total formula @{PilotFormula}" >@{nonlevel|max}[Half Level]+@{PilotMod}[Mod]+@{PilotFeat}[Training]+@{PilotFeat|max}[Focus]+@{PilotMisc}[Misc]+@{CT}[CT]</textarea> 
 								<span class="small"><b>Template Formula</b></span>	<br />
 								<textarea type="text" name="attr_PilotFormula_max" class="atkFormula" title="Skill Template formula @{PilotFormula|max}" >&{template:skill} {{name=Pilot}} {{skill=[[1d20 + @{Pilot}]]}}  {{notes=@{Pilot|max}}}</textarea> 
 							</span>
@@ -2420,7 +2421,7 @@
 							<span class="table-data" style="min-width:50px">	</span>
 							<span class="table-data atkFormula">							
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
-								<textarea type="text" name="attr_StealthFormula" class="atkFormula" title="Skill Total formula @{StealthFormula}" >@{level|max}[Half Level]+@{StealthMod}[Mod]+@{StealthFeat}[Training]+@{StealthFeat|max}[Focus]+@{StealthSize}[Size]+@{ArmorType|max}[Armor Penalty]+@{EquipmentLoad}[Heavy Load]+@{StealthMisc}[Misc]+@{CT}[CT]</textarea> 
+								<textarea type="text" name="attr_StealthFormula" class="atkFormula" title="Skill Total formula @{StealthFormula}" >@{nonlevel|max}[Half Level]+@{StealthMod}[Mod]+@{StealthFeat}[Training]+@{StealthFeat|max}[Focus]+@{StealthSize}[Size]+@{ArmorType|max}[Armor Penalty]+@{EquipmentLoad}[Heavy Load]+@{StealthMisc}[Misc]+@{CT}[CT]</textarea> 
 								<span class="small"><b>Template Formula</b></span>	<br />
 								<textarea type="text" name="attr_StealthFormula_max" class="atkFormula" title="Skill Template formula @{StealthFormula|max}" >&{template:skill} {{name=Stealth}} {{skill=[[1d20 + @{Stealth}]]}} {{notes=@{Stealth|max}}}</textarea> 
 							</span>
@@ -2463,7 +2464,7 @@
 							<span class="table-data" style="min-width:50px">	</span>
 							<span class="table-data atkFormula">							
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
-								<textarea type="text" name="attr_UsetheForceFormula" class="atkFormula" title="Skill Total formula @{UsetheForceFormula}" >@{level|max}[Half Level]+@{UsetheForceMod}[Mod]+@{UsetheForceFeat}[Training]+@{UsetheForceFeat|max}[Focus]+@{UsetheForceMisc}[Misc]+@{CT}[CT]</textarea> 
+								<textarea type="text" name="attr_UsetheForceFormula" class="atkFormula" title="Skill Total formula @{UsetheForceFormula}" >@{nonlevel|max}[Half Level]+@{UsetheForceMod}[Mod]+@{UsetheForceFeat}[Training]+@{UsetheForceFeat|max}[Focus]+@{UsetheForceMisc}[Misc]+@{CT}[CT]</textarea> 
 								<span class="small"><b>Template Formula</b></span>	<br />
 								<textarea type="text" name="attr_UsetheForceFormula_max" class="atkFormula" title="Skill Template formula @{UsetheForceFormula|max}" >&{template:skill} {{name= Use the Force}} {{skill=[[1d20 + @{UsetheForce}]]}} {{notes=@{UsetheForce|max}}}</textarea> 
 							</span>
@@ -2483,7 +2484,7 @@
 						<td colspan="4" align="left">	<input type="checkbox" class="sect-show hidden" value="1" name="attr_Skill-Formula-show" />	<div class="sect">
 							<input type="text" name="attr_SkillNotes" placeholder="Skill Notes" title="Skill Notes" style="margin-left:10%; width:90%;" /> <br />
 							<span class="small" style="margin-left:10%;"><b>Skill Total Formula</b></span>	<br />
-							<input type="text" style="margin-left:10%; width:90%;" name="attr_skill_max" value="@{str|max}+@{level|max}[Half Level]" title="Skill Total (Can Include formula, for example: (@{str|max}+@{level|max}[Half Level]+5+5) or enter the total) " /> <br />
+							<input type="text" style="margin-left:10%; width:90%;" name="attr_skill_max" value="@{str|max}+@{nonlevel|max}[Half Level]" title="Skill Total (Can Include formula, for example: (@{str|max}+@{nonlevel|max}[Half Level]+5+5) or enter the total) " /> <br />
 							<span class="small" style="margin-left:10%;"><b>Skill Roll Formula</b></span>	<br />
 							<!-- Skill Formula -->	<textarea type="text" name="attr_Formula" class="atkFormula" style="margin-left:10%; width:90%;" title="Skill Template formula" >&{template:skill} {{name=@{Skill}}} {{skill=[[1d20+@{SkillTotal}]]}}</textarea>	
 						</div>	</td>
