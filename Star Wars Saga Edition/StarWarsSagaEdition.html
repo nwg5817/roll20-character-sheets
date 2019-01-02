@@ -2102,57 +2102,118 @@
 			</table>
 			<br />			
 			<div class="textHead2Col">Attacks</div>
-			<fieldset class="repeating_NPC-attack">	
+				<fieldset class="repeating_NPC-attack">	
 				<div class="table">	
 					<div class="table-row">
 						<div class="table">	
 							<div class="table-row">												
 								<span class="table-data">	<button  type="roll" name="roll_WeaponCheck" value="@{AttackFormula}" title="Attack Roll"> </button>	</span>
-								<span class="table-data" style="width:55%">	<input type="text" name="attr_WeaponName" placeholder="Weapon Name" style="width:100%"  title="Weapon Name @{repeating_npc-attack_X_WeaponName}" />	</span>
-								<span class="table-data">	<input type="text" name="attr_WeaponName_max" placeholder="Type" style="width:100%" title="Weapon Type @{repeating_npc-attack_X_WeaponName|max}" />	</span>
-							</div>
+								<span class="table-data" style="width:50%">	<input type="text" name="attr_WeaponName" placeholder="Weapon Name" style="width:100%"  title="Weapon Name @{repeating_NPC-attack_X_WeaponName}" />	</span>
+								<span class="table-data">	<input type="text" name="attr_WeaponName_max" placeholder="Type" style="width:100%" title="Weapon Type @{repeating_NPC-attack_X_WeaponName|max}" />	</span>
+								<span class="table-data" style="width:35px">		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="sectAttack-show" title="Show/Hide Attack & Damage" name="attr_AttackDamage-show" value="1" style="opacity:0;width: 35px;height: 16px;position: relative;top: 5px;left: 6px;margin: -32px;cursor: pointer;z-index: 1;" /><span></span>	</span>
+							</div>							
 						</div>						
-					</div>				
+					</div>
+					<input type="checkbox" class="sectAttack-show hidden" name="attr_AttackDamage-show" value="1"/>						
 					<div class="table-row">
 						<span class="table-data">	<div class="table">	
 							<div class="table-row">
 								<span class="table-header" style="min-width:44px"></span>
-								<span class="table-header" style="min-width:55px"></span>
-								<span class="table-header" style="min-width:130px">Total</span>
-								<span class="table-header"></span>
-								<span class="table-header">Mod</span>
-							</div>	
-							<div class="table-row">
-								<span class="table-data" style="min-width:44px">		</span>
-								<span class="table-data col1"  style="min-width:55px">	Attack	</span>
-								<span class="table-data center" style="min-width:130px">
-									<input type="number" name="attr_AttackTotal" value="@{Attack}+@{npc-ct}"  disabled="true" title="Attack Total Preview @{repeating_npc-attack_X_AttackTotal}" />	</span>
-								<span class="table-data center">	&nbsp;|&nbsp;</span>
-								<span class="table-data center">	<input type="text" name="attr_Attack" value="@{BAB}+@{STR|max}"  title="Attack Total (You can use formulas, for example: @{BAB}+@{STR|max} or enter the total attack modifier) @{repeating_npc-attack_X_attack}" style="width:100%" />	</span>
+								<span class="table-header" style="min-width:55px;"></span>
+							<input type="checkbox" class="sectAttack-show hidden" name="attr_AttackDamage-show" value="1"/>	
+								<span class="table-header sectAttack not-sheet-show" style="min-width:130px">Total</span>
+								<span class="table-header sectAttack"></span>
+								<span class="table-header sectAttack" style="min-width:80px">Mod</span>					
+								<span class="table-header sectAttack"></span>
+								<span class="table-header sectAttack" style="min-width:50px">Misc</span>
 							</div>
-						</div>	</span>
-					</div>		
-					<div class="table-row">
-						<span class="table-data">	<div class="table">	
-							<div class="table-row">
+							<input type="checkbox" class="sectAttack-show hidden" name="attr_AttackDamage-show" value="1"/>		
+							<div class="table-row sectAttack">
 								<span class="table-data" style="min-width:44px">		</span>
-								<span class="table-data col1"  style="min-width:55px">	Damage	</span>
-								<span class="table-data" style="min-width:130px">	
-									<input type="text" name="attr_damage" placeholder="2d8"  style="width:60px" title="Weapon Damage @{repeating_npc-attack_X_damage}"/>
-									&nbsp;+&nbsp;	
-									<input type="number" name="attr_DamageTotal" value="@{damage|max}" disabled="true"  title="Damage Total @{repeating_npc-attack_X_DamageTotal}" />	</span>
+								<span class="table-data col1"  style="min-width:55px">	<span>Attack</span>	<input type="checkbox" class="sect-show skillsHideCheckbox" title="Show/Hide Attack Formula" name="attr_attack-show" value="1" style="width: 38px; margin-left: -41px;" />	</span>
+								<span class="table-data center" style="min-width:130px">
+									<input type="number" name="attr_AttackTotal_max" value="@{AttackTotal}" disabled="true"  title="Attack Total  @{repeating_NPC-attack_X_AttackTotal|max}" />	</span>
 								<span class="table-data center">	&nbsp;|&nbsp;</span>
-								<span class="table-data center">	<input type="text" name="attr_damage_max" value="@{STR|max}+@{level|max}"  style="width:100%" title="Weapon Damage Bonus (You can use formulas, for example: (@{STR|max}*2)+@{level|max} or enter the entire Damage roll for example: 6) @{repeating_npc-attack_X_damage|max}"/>	</span>								
+								<span class="table-data center" style="min-width:80px">
+									<select name="attr_attackMod" class="modtype" title="Attack Modifier @{repeating_NPC-attack_X_attackMod}">           
+									  <option value="@{str|max}" data-i18n="str">STR</option>
+									  <option value="@{dex|max}" data-i18n="dex">DEX</option>	
+									  <option value="@{cha|max}" data-i18n="cha">CHA</option>
+									</select>	</span>
+								<span class="table-data center">	&nbsp;+&nbsp;	</span>
+								<span class="table-data center" style="min-width:50px">
+									<input type="number" name="attr_attackModMisc" placeholder="Misc" value="0" style="width:40px"  title="Attack Miscellaneous Modifier @{repeating_NPC-attack_X_attackModMisc}" />	</span>
 							</div>
 						</div>	</span>
 					</div>
-					<div class="table-row">
+					<div style="width:100%">	<input type="checkbox" class="sect-show hidden" value="1" name="attr_attack-show" />
+						<div class="table-row sect">
+							<span class="table-data" style="min-width:44px">		</span> 
+							<span class="table-data atkFormula">
+								<span class="small"><b>Attack Modifier Total Formula</b></span>	<br />
+								<textarea type="text" name="attr_AttackTotal" class="atkFormula" title="Attack Total formula @{repeating_NPC-attack_X_AttackTotal}" >@{BAB}[BAB] + @{attackMod}[Mod] + @{attackModMisc}[Misc] +@{CT}[CT] +@{ArmorType|max}[Armor Penalty] </textarea> 							
+								<span class="small"><b>Attack Roll Formula</b></span>	<br />
+								<textarea type="text" name="attr_WeaponAttack" class="atkFormula" title="Attack formula @{repeating_NPC-attack_X_WeaponAttack}" >1d20cs>@{WeaponCrit}[Critical Range] + @{attackTotal}</textarea> 
+							</span>
+						</div>
+					</div>				
+					<div class="table-row sectAttack">
+						<span class="table-data">	<div class="table">	
+							<div class="table-row">
+								<span class="table-data" style="min-width:44px">		</span>
+								<span class="table-data col1"  style="min-width:55px">	<span>Damage</span>	<input type="checkbox" class="sect-show skillsHideCheckbox" title="Show/Hide Attack Formula" name="attr_damage-show" value="1" style="width: 50px; margin-left: -53px;" />	</span>
+								<span class="table-data" style="min-width:130px">	
+									<input type="text" name="attr_damage" placeholder="2d8" value="2d8"  style="width:60px" title="Weapon Damage @{repeating_NPC-attack_X_damage}"/>
+									&nbsp;+&nbsp;	
+									<input type="number" name="attr_DamageTotal_max" value="@{damageTotal}" disabled="true"  title="Damage Total  @{repeating_NPC-attack_X_DamageTotal|max}" />	</span>
+								<span class="table-data center">	&nbsp;|&nbsp;</span>
+								<span class="table-data center" style="min-width:80px">	
+									<select name="attr_damageMod" class="modtype" title="Weapon Damage modifier @{repeating_NPC-attack_X_damageMod}">
+									  <option value="0" selected>None</option>                
+									  <option value="@{str|max}" data-i18n="str">STR</option>
+									  <option value="[[@{str|max}*2]]">STRx2</option>
+									  <option value="@{dex|max}" data-i18n="dex">DEX</option>	
+									  <option value="[[@{dex|max}*2]]">DEXx2</option>
+									  <option value="@{cha|max}" data-i18n="cha">CHA</option>
+									  <option value="[[@{cha|max}*2]]">CHAx2</option>
+									</select>	</span>
+								<span class="table-data center">	&nbsp;+&nbsp;	</span>
+								<span class="table-data center" style="min-width:50px">	<input type="number" name="attr_damageMisc" placeholder="Misc" value="0" style="width:40px" title="Weapon Damage Miscellaneous Modifier @{repeating_NPC-attack_X_damageMisc}"  />	</span>
+							</div>
+						</div>	</span>
+					</div>
+					<div style="width:100%">	<input type="checkbox" class="sect-show hidden" value="1" name="attr_damage-show" />
+						<div class="table-row sect">
+							<span class="table-data" style="width:44px">		</span> 
+							<span class="table-data atkFormula">	
+								<span class="small"><b>Damage Modifier Total Formula</b></span>	<br />						
+								<textarea type="text" name="attr_DamageTotal" class="atkFormula" title="Damage Total formula @{repeating_NPC-attack_X_DamageTotal}" >@{level|max}[Half Level] + @{damageMod}[Mod] + @{damageMisc}[Misc]</textarea> 	
+								<span class="small"><b>Damage Roll Formula</b></span>	<br />					
+								<textarea type="text" name="attr_WeaponDamage" class="atkFormula" title="Damage formula @{repeating_NPC-attack_X_WeaponDamage}" >@{damage}[Damage] + @{DamageTotal}</textarea> 
+							</span>
+						</div>
+					</div>
+					<div class="table-row  sectAttack">
+						<span class="table-data">	<div class="table">	
+							<div class="table-row">
+								<span class="table-data" style="min-width:44px">		</span>
+								<span class="table-data" style="min-width:110px">	<b>Target Defense</b>	</span>
+									<span class="table-data">	<select name="attr_targetd" style="width:100%" title="Target Defense @{repeating_NPC-attack_X_targetd}">									
+										<option value="*vs.* **Reflex:**[[@{target|Reflex}]]" data-i18n="type-reflex">Reflex</option>                
+										<option value="*vs.* **Fort:**[[@{target|fortitude}]]" data-i18n="type-fort">Fortitude</option>
+										<option value="*vs.* **Will:**[[@{target|will}]]" data-i18n="type-will">Willpower</option>
+										<option value="" selected>None</option>										
+									</select>	</span> 
+							</div>
+						</div>	</span>
+					</div>									
+					<div class="table-row  sectAttack">
 						<span class="table-data">	<div class="table">	
 							<div class="table-row">
 								<span class="table-data" style="min-width:44px">		</span>
 								<span class="table-data" style="min-width:110px">	<b>Critical Info</b>	</span>
-								<span class="table-data">	<span class="small"><b>Range</b></span> 	<input type="number" name="attr_WeaponCrit" placeholder="Crit" value="20" title="Weapon Critical Starting Range ie.20 @{repeating_npc-attack_X_WeaponCrit}" />	</span>
-								<span class="table-data">		<span class="small"><b>Multiplier</b></span>	 <input type="number" name="attr_WeaponCrit_max" value="2" title="Weapon Crit Damage Multiplier @{repeating_npc-attack_X_WeaponCrit|max}" />		</span>
+								<span class="table-data">	<span class="small"><b>Range</b></span> 	<input type="number" name="attr_WeaponCrit" placeholder="Crit" value="20" title="Weapon Critical Starting Range ie.20 @{repeating_NPC-attack_X_WeaponCrit}" />	</span>
+								<span class="table-data">		<span class="small"><b>Multiplier</b></span>	 <input type="number" name="attr_WeaponCrit_max" value="2" title="Weapon Crit Damage Multiplier @{repeating_NPC-attack_X_WeaponCrit|max}" />		</span>
 								<span class="table-data">	<b>Template <br/>Formula</b>	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="sect-show" title="Show/Hide Attack Template Formula" name="attr_AttackFormula-show" value="1" style="opacity:0;width: 35px;height: 16px;position: relative;top: 5px;left: 6px;margin: -32px;cursor: pointer;z-index: 1;" /><span></span>	</span>
 							</div>
 						</div>	</span>
@@ -2163,7 +2224,7 @@
 							<span class="table-data" style="width:44px">		</span> 
 							<span class="table-data atkFormula">							
 								<span class="small"><b>Template Formula</b></span>	<br />						
-								<textarea type="text" name="attr_AttackFormula" class="atkFormula" title="Attack Template formula @{repeating_npc-attack_X_AttackFormula}" >&{template:attack} {{name=@{WeaponName}}} {{type=@{WeaponName|max}}} {{attack=[[1d20cs>@{WeaponCrit} + @{AttackTotal}]]}} {{atkeffect=@{WeaponNotes|max}}} {{damage=[[@{damage}+@{damageTotal}]]}} {{dmgcrit=[[(@{damage}+@{damageTotal})*@{WeaponCrit|max}]]}}</textarea> 
+								<textarea type="text" name="attr_AttackFormula" class="atkFormula" title="Attack Template formula @{repeating_NPC-attack_X_AttackFormula}" >&{template:attack} {{name=@{WeaponName}}} {{type=@{WeaponName|max}}}  {{atkeffect=@{WeaponNotes|max}}} {{attack=[[@{WeaponAttack}]] @{targetd}}} {{damage=[[@{WeaponDamage}]]}} {{dmgcrit=[[(@{WeaponDamage})*@{WeaponCrit|max}[Critical Multiplier]]]}}</textarea> 
 							</span>
 						</div>	</span>
 					</div>
@@ -2172,14 +2233,14 @@
 							<div class="table-row">
 								<span class="table-data" style="width:44px">		</span> 
 								<span class="table-data">							
-									<textarea type="text" name="attr_WeaponNotes_max" placeholder="Attack Notes" class="atkNotes" title="Attack Notes: ie Devesating Attack, Rapid Strike, Point Blank Shot @{repeating_npc-attack_X_WeaponNotes|max}" ></textarea>
-									<textarea type="text" name="attr_WeaponNotes" placeholder="Weapon Notes" class="atkNotes" title="Weapon Notes @{repeating_npc-attack_X_WeaponNotes}"></textarea>
+									<textarea type="text" name="attr_WeaponNotes_max" placeholder="Attack Notes" class="atkNotes" title="Attack Notes: ie Devesating Attack, Rapid Strike, Point Blank Shot @{repeating_NPC-attack_X_WeaponNotes|max}" ></textarea>
+									<textarea type="text" name="attr_WeaponNotes" placeholder="Weapon Notes" class="atkNotes" title="Weapon Notes @{repeating_NPC-attack_X_WeaponNotes}"></textarea>
 								</span>
 							</div>
 						</div>	</span>
 					</div>
 				</div>
-			</fieldset>
+				</fieldset>
 		</div>	
 		<div class="col">
 			<div class="textHead2Col">Skills</div>
