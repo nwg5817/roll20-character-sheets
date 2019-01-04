@@ -1830,37 +1830,37 @@
 					<td class="col1">STR<br><div class="small">Strength</div></td>
 					<td><input type="number" name="attr_STR" value="8" title="Strength Score" /></td>
 					<td><input type="number" name="attr_Str_max" value="[[floor(@{STR}/2-5)]]" disabled="true" title="Strength Modifier" /></td>
-					<td><button type="roll" name="roll_NPC-STRCheck" value="&{template:skill} {{name=Strength}}} {{skill=[[ 1d20+@{Str|max}+@{npc-CT}]]}}" title="Roll Strength"></button></td>
+					<td><button type="roll" name="roll_NPC-STRCheck" value="&{template:skill} {{name=Strength}}} {{skill=[[ 1d20+@{Str|max}+@{CT}]]}}" title="Roll Strength"></button></td>
 				</tr>
 				<tr>
 					<td class="col1">DEX<br><div class="small">Dexterity</div></td>
 					<td><input type="number" name="attr_DEX" value="8" title="Dexterity Score" /></td>
 					<td><input type="number" name="attr_DEX_max" value="[[floor(@{DEX}/2-5)]]" disabled="true" title="Dexterity Modifier" /></td>
-					<td><button type="roll" name="roll_NPC-DEXCheck" value="&{template:skill} {{name=Dexterity}}} {{skill=[[ 1d20+@{dex|max}+@{npc-CT}]]}}" title="Roll Dexterity"></button></td>
+					<td><button type="roll" name="roll_NPC-DEXCheck" value="&{template:skill} {{name=Dexterity}}} {{skill=[[ 1d20+@{dex|max}+@{CT}]]}}" title="Roll Dexterity"></button></td>
 				</tr>
 				<tr>
 					<td class="col1">CON<br><div class="small">Constitution</div></td>
 					<td><input type="number" name="attr_CON" value="8" title="Constitution Score" /></td>
 					<td><input type="number" name="attr_CON_max" value="[[floor(@{CON}/2-5)]]" disabled="true" title="Constitution Modifier" /></td>
-					<td><button type="roll" name="roll_NPC-CONCheck" value="&{template:skill} {{name=Constitution}}} {{skill=[[ 1d20+@{Con|max}+@{npc-CT}]]}}" title="Roll Constitution"></button></td>
+					<td><button type="roll" name="roll_NPC-CONCheck" value="&{template:skill} {{name=Constitution}}} {{skill=[[ 1d20+@{Con|max}+@{CT}]]}}" title="Roll Constitution"></button></td>
 				</tr>
 				<tr>
 					<td class="col1">INT<br><div class="small">Intelligence</div></td>
 					<td><input type="number" name="attr_INT" value="8" title="Intelligence Score" /></td>
 					<td><input type="number" name="attr_INT_max" value="[[floor(@{INT}/2-5)]]" disabled="true" title="Intelligence Modifier" /></td>
-					<td><button type="roll" name="roll_NPC-INTCheck" value="&{template:skill} {{name=Intelligence}}} {{skill=[[ 1d20+@{int|max}+@{npc-CT}]]}}"></button></td>
+					<td><button type="roll" name="roll_NPC-INTCheck" value="&{template:skill} {{name=Intelligence}}} {{skill=[[ 1d20+@{int|max}+@{CT}]]}}"></button></td>
 				</tr>
 				<tr>
 					<td class="col1">WIS<br><div class="small">Wisdom</div></td>
 					<td><input type="number" name="attr_WIS" value="8" title="Wisdom Score" /></td>
 					<td><input type="number" name="attr_WIS_max" value="[[floor(@{WIS}/2-5)]]" disabled="true" title="Wisdom Modifier" /></td>
-					<td><button type="roll" name="roll_NPC-WISCheck" value="&{template:skill} {{name=Wisdom}}} {{skill=[[ 1d20+@{Wis|max}+@{npc-CT}]]}}" title="Roll Wisdom"></button></td>
+					<td><button type="roll" name="roll_NPC-WISCheck" value="&{template:skill} {{name=Wisdom}}} {{skill=[[ 1d20+@{Wis|max}+@{CT}]]}}" title="Roll Wisdom"></button></td>
 				</tr>
 				<tr>
 					<td class="col1">CHA<br><div class="small">Charisma</div></td>
 					<td><input type="number" name="attr_CHA" value="8" title="Charisma Score" /></td>
 					<td><input type="number" name="attr_CHA_max" value="[[floor(@{CHA}/2-5)]]" disabled="true" title="Charisma Modifier" /></td>
-					<td><button type="roll" name="roll_NPC-CHACheck" value="&{template:skill} {{name=Charisma}}} {{skill=[[ 1d20+@{Cha|max}+@{npc-CT}]]}}" title="Roll Charisma"></button></td>
+					<td><button type="roll" name="roll_NPC-CHACheck" value="&{template:skill} {{name=Charisma}}} {{skill=[[ 1d20+@{Cha|max}+@{CT}]]}}" title="Roll Charisma"></button></td>
 				</tr>
 			  </tbody>
 			</table>
@@ -1871,12 +1871,12 @@
 				<tr><th>Current</th>		<th></th>	<th>Total</th>	
 					<td colspan="3"></td>
 					<td rowspan="4" style="text-align:left;position: relative;left: 12px;">		
-						<input type="radio" value="0" name="attr_NPC-CT" checked="true" /> Normal<br />
-						<input type="radio" value="-1" name="attr_NPC-CT" /> -1<br />
-						<input type="radio" value="-2" name="attr_NPC-CT" /> -2<br />
-						<input type="radio" value="-5" name="attr_NPC-CT" /> -5<br />
-						<input type="radio" value="-10" name="attr_NPC-CT" /> -10<br />
-						<input type="radio" value="-10[Helpless]" name="attr_NPC-CT" /> Helpless</td>		
+						<input type="radio" value="0" name="attr_CT" checked="true" /> Normal<br />
+						<input type="radio" value="-1" name="attr_CT" /> -1<br />
+						<input type="radio" value="-2" name="attr_CT" /> -2<br />
+						<input type="radio" value="-5" name="attr_CT" /> -5<br />
+						<input type="radio" value="-10" name="attr_CT" /> -10<br />
+						<input type="radio" value="-10[Helpless]" name="attr_CT" /> Helpless</td>		
 				</tr>
 				<tr>	
 					<td> <input type="number" name="attr_HP" value="0" title="Current HP"/></td>
@@ -1895,7 +1895,7 @@
 					<td><input type="number" name="attr_DamageThresholdMisc" value="0"  title="Damage Threshold Miscellaneous Modifier" /></td>
 				</tr>	
 			</table>
-			<p>Ignore CT? <input type="checkbox" value="-@{npc-ct}" name="attr_NPC-CTIgnoreDT"  title="Does Damage Threshold ignore decrease from the Condition Track?" /></p>
+			<p>Ignore CT? <input type="checkbox" value="-@{ct}" name="attr_NPC-CTIgnoreDT"  title="Does Damage Threshold ignore decrease from the Condition Track?" /></p>
 			
 			<table style="text-align:left">
 				<tr>	
@@ -2473,24 +2473,40 @@
 				</div>	</div>		
 			</div>
 			<fieldset class="repeating_npc-skill">	
-				<table class="spacing">
-					<tr>
-						<td class="skillsCol1"><input type="text" name="attr_Skill" placeholder="Skill Name" title="Skill Name" /></td>
-						<td><button type="roll" name="roll_SkillCheck" value="@{formula}" title="Roll Skill"></button></td>
-						<td><input type="number" name="attr_SkillTotal" value="@{skill|max}+@{npc-ct}"  disabled="true" title="Skill Total Preview" /></td>
-						<td style="min-width:75px">	<b>Formulas & Notes</b>	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="sect-show" title="Show/Hide Skill Template Formula" name="attr_Skill-Formula-show" value="1" style="opacity:0;width: 35px;height: 16px;position: relative;top: 5px;left: 6px;margin: -32px;cursor: pointer;z-index: 1;" /><span></span>	</td>
-					</tr>
-					<tr>
-						<td colspan="4" align="left">	<input type="checkbox" class="sect-show hidden" value="1" name="attr_Skill-Formula-show" />	<div class="sect">
-							<input type="text" name="attr_SkillNotes" placeholder="Skill Notes" title="Skill Notes" style="margin-left:10%; width:90%;" /> <br />
-							<span class="small" style="margin-left:10%;"><b>Skill Total Formula</b></span>	<br />
-							<input type="text" style="margin-left:10%; width:90%;" name="attr_skill_max" value="@{str|max}+@{nonlevel|max}[Half Level]" title="Skill Total (Can Include formula, for example: (@{str|max}+@{nonlevel|max}[Half Level]+5+5) or enter the total) " /> <br />
-							<span class="small" style="margin-left:10%;"><b>Skill Roll Formula</b></span>	<br />
-							<!-- Skill Formula -->	<textarea type="text" name="attr_Formula" class="atkFormula" style="margin-left:10%; width:90%;" title="Skill Template formula" >&{template:skill} {{name=@{Skill}}} {{skill=[[1d20+@{SkillTotal}]]}}</textarea>	
-						</div>	</td>
-					</tr>
-				</table>
-			</fieldset>	
+				<div class="table-row"><div class="table">
+					<div class="table-row">
+						<span class="table-data">	<input type="text" name="attr_npcSkillName" placeholder="Skill Name" style="width: 127px" title="Skill Name @{repeating_npc-skill_X_skillname" /></span>
+						<span class="table-data"><button type="roll" name="roll_SkillCheck" value="@{npcSkillFormula|max}"></button></span>
+						<span class="table-data"><input type="number" name="attr_npcSkilltotal" value="@{npcSkillFormula}" disabled="true" title="Skill Total @{Skill}" class="skills" /></span> 
+						<span class="table-data">&nbsp;=&nbsp;</span>	
+						<span class="table-data"><select name="attr_npcSkillMod" class="modtype" title="Skill Mod (default DEX)">
+							  <option value="@{str|max}" data-i18n="str"  selected>STR</option>
+							  <option value="@{dex|max}" data-i18n="dex">DEX</option>	
+							  <option value="@{con|max}" data-i18n="con">CON</option>
+							  <option value="@{int|max}" data-i18n="int">INT</option>
+							  <option value="@{wis|max}" data-i18n="wis">WIS</option>
+							  <option value="@{cha|max}" data-i18n="cha">CHA</option>
+							</select></span>
+						<span class="table-data skillsFeats"><input type="checkbox" value="5" name="attr_npcSkillFeat" title="Trained in Skill?" /></span> <!-- Skill Training -->
+						<span class="table-data skillsFeats"><input type="checkbox" value="5" name="attr_npcSkillFeat_max" title="Focused in Skill?" /></span> <!-- Skill Focus -->
+						<span class="table-data"><input type="number" name="attr_SkillMisc" title="Skill Miscellaneous Modifier" value="0" class="skills" /></span>
+					</div>
+				</div></div>
+				<div>		
+					<!-- Skill Formula -->	<input type="checkbox" class="sect-show hidden" value="1" name="attr_Skill-Skill-Formula-Show" />	
+					<div class="table-row sect">	<div class="table">
+						<div class="table-row">
+							<span class="table-data" style="min-width:50px">	</span>
+							<span class="table-data atkFormula">							
+								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
+								<textarea type="text" name="attr_npcSkillFormula" class="atkFormula" title="Skill Total formula @{npcSkillFormula}" >@{nonlevel|max}[Half Level]+@{npcSkillMod}[Mod]+@{npcSkillFeat}[Training]+@{npcSkillFeat|max}[Focus]+@{SkillMisc}[Misc]+@{CT}[CT]</textarea> 
+								<span class="small"><b>Template Formula</b></span>	<br />
+								<textarea type="text" name="attr_npcSkillFormula_max" class="atkFormula" title="Skill Template formula @{npcSkillFormula|max}" >&{template:skill} {{name=@{npcSkillName}}} {{skill=[[1d20 + @{npcSkilltotal}]]}} </textarea> 
+							</span>
+						</div>
+					</div>	</div>
+				</div>
+			</fieldset>		
 			<br />			
 			<div class="textHead2Col">Attack Options</div>
 				<textarea type="text" name="attr_AttackOptions" rows="2" class="ActionNotes" title="Attack Options @{AttackOptions}"></textarea>
