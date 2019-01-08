@@ -540,12 +540,12 @@
 				</div>					
 				<div class="table-row"><div class="table">
 					<div class="table-row">
-						<span class="table-data skillsCol1">	<span>Climb</span>	
-							<input type="checkbox" class="sect-show skillsHideCheckbox" style="width: 37px;  margin-left: -40px;" value="1" name="attr_Skill-Climb-Show" title="Show/Hide Climb Notes" /></span>
-						<span class="table-data"><button type="roll" name="roll_ClimbCheck" value="@{ClimbFormula|max}"></button></span>
-						<span class="table-data"><input type="number" name="attr_Climb" value="@{ClimbFormula}" disabled="true" title="Climb Total @{Climb}" class="skills" /></span> 
+						<span class="table-data skillsCol1">	<span>Athletics</span>	
+							<input type="checkbox" class="sect-show skillsHideCheckbox" style="width: 37px;  margin-left: -40px;" value="1" name="attr_Skill-Athletics-Show" title="Show/Hide Athletics Notes" /></span>
+						<span class="table-data"><button type="roll" name="roll_AthleticsCheck" value="@{AthleticsFormula|max}"></button></span>
+						<span class="table-data"><input type="number" name="attr_Athletics" value="@{AthleticsFormula}" disabled="true" title="Athletics Total @{Athletics}" class="skills" /></span> 
 						<span class="table-data">&nbsp;=&nbsp;</span>	
-						<span class="table-data"><select name="attr_ClimbMod" class="modtype" title="Climb Mod (default STR)">
+						<span class="table-data"><select name="attr_AthleticsMod" class="modtype" title="Athletics Mod (default STR)">
 							  <option value="@{str|max}" selected>STR</option>
 							  <option value="@{dex|max}" data-i18n="dex">DEX</option>	
 							  <option value="@{con|max}" data-i18n="con">CON</option>
@@ -553,30 +553,30 @@
 							  <option value="@{wis|max}" data-i18n="wis">WIS</option>
 							  <option value="@{cha|max}" data-i18n="cha">CHA</option>
 							</select></span>
-						<span class="table-data skillsFeats"><input type="checkbox" value="5" name="attr_ClimbFeat" title="Trained in Climb?" /></span> <!-- Skill Training -->
-						<span class="table-data skillsFeats"><input type="checkbox" value="5" name="attr_ClimbFeat_max" title="Focused in Climb?" /></span> <!-- Skill Focus -->
-						<span class="table-data"><input type="number" name="attr_ClimbMisc" title="Climb Miscellaneous Modifier" value="0" class="skills" /></span>
+						<span class="table-data skillsFeats"><input type="checkbox" value="5" name="attr_AthleticsFeat" title="Trained in Athletics?" /></span> <!-- Skill Training -->
+						<span class="table-data skillsFeats"><input type="checkbox" value="5" name="attr_AthleticsFeat_max" title="Focused in Athletics?" /></span> <!-- Skill Focus -->
+						<span class="table-data"><input type="number" name="attr_AthleticsMisc" title="Athletics Miscellaneous Modifier" value="0" class="skills" /></span>
 					</div>
 				</div></div>
 				<div>		
-					<!-- Climb Notes -->	<input type="checkbox" class="sect-show hidden" value="1" name="attr_Skill-Climb-Show" />
+					<!-- Athletics Notes -->	<input type="checkbox" class="sect-show hidden" value="1" name="attr_Skill-Athletics-Show" />
 					<div class="table-row sect"><div class="table">
 						<div class="table-row">
 							<span class="table-data" style="min-width:50px">	</span>
-							<span class="table-data">	<input class="skillsNotes" type="text" name="attr_Climb_max" placeholder="Climb Notes" title="Climb Notes @{Climb|max}" />	</span>
+							<span class="table-data">	<input class="skillsNotes" type="text" name="attr_Athletics_max" placeholder="Athletics Notes" title="Athletics Notes @{Athletics|max}" />	</span>
 							<span class="table-data" style="min-width:15px">	</span>
-							<span class="table-data">	<b>Formula</b>	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="sect-show" title="Show/Hide Skill Template Formula_max" name="attr_Skill-Climb-Formula-show" value="1" style="opacity:0;width: 35px;height: 16px;position: relative;top: 5px;left: 6px;margin: -32px;cursor: pointer;z-index: 1;" /><span></span>	</span>							
+							<span class="table-data">	<b>Formula</b>	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="sect-show" title="Show/Hide Skill Template Formula_max" name="attr_Skill-Athletics-Formula-show" value="1" style="opacity:0;width: 35px;height: 16px;position: relative;top: 5px;left: 6px;margin: -32px;cursor: pointer;z-index: 1;" /><span></span>	</span>							
 						</div>
 					</div>	</div>	
-					<!-- Climb Formula -->	<input type="checkbox" class="sect-show hidden" value="1" name="attr_Skill-Climb-Formula-Show" />	
+					<!-- Athletics Formula -->	<input type="checkbox" class="sect-show hidden" value="1" name="attr_Skill-Athletics-Formula-Show" />	
 					<div class="table-row sect">	<div class="table">
 						<div class="table-row">
 							<span class="table-data" style="min-width:50px">	</span>
 							<span class="table-data skillFormula">							
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
-								<input type="text" name="attr_ClimbFormula" class="skillFormula" title="Skill Total formula @{ClimbFormula}" value="@{nonlevel|max}[Half Level]+@{ClimbMod}[Mod]+@{ClimbFeat}[Training]+@{ClimbFeat|max}[Focus]+@{ArmorType|max}[Armor Penalty]+@{EquipmentLoad}[Heavy Load]+@{ClimbMisc}[Misc]+@{CT}[CT]" /> 
+								<input type="text" name="attr_AthleticsFormula" class="skillFormula" title="Skill Total formula @{AthleticsFormula}" value="@{nonlevel|max}[Half Level]+@{AthleticsMod}[Mod]+@{AthleticsFeat}[Training]+@{AthleticsFeat|max}[Focus]+@{ArmorType|max}[Armor Penalty]+@{EquipmentLoad}[Heavy Load]+@{AthleticsMisc}[Misc]+@{CT}[CT]" /> 
 								<span class="small"><b>Template Formula</b></span>	<br />
-								<input type="text" name="attr_ClimbFormula_max" class="skillFormula" title="Skill Template formula @{ClimbFormula|max}" value="&{template:skill} {{name=Climb}} {{skill=[[1d20 + @{Climb}]]}} {{notes=@{Climb|max}}}" />
+								<input type="text" name="attr_AthleticsFormula_max" class="skillFormula" title="Skill Template formula @{AthleticsFormula|max}" value="&{template:skill} {{name=Athletics}} {{skill=[[1d20 + @{Athletics}]]}} {{notes=@{Athletics|max}}}" />
 							</span>
 						</div>
 					</div>	</div>
@@ -753,49 +753,6 @@
 						</div>
 					</div>	</div>
 				</div>					
-				<div class="table-row"><div class="table">
-					<div class="table-row">
-						<span class="table-data skillsCol1">	<span>Jump</span>	
-							<input type="checkbox" class="sect-show skillsHideCheckbox" style="width: 48px;  margin-left: -48px;" value="1" name="attr_Skill-Jump-Show" title="Show/Hide Jump Notes" /></span>
-						<span class="table-data"><button type="roll" name="roll_JumpCheck" value="@{JumpFormula|max}"></button></span>
-						<span class="table-data"><input type="number" name="attr_Jump" value="@{JumpFormula}" disabled="true" title="Jump Total @{Jump}" class="skills" /></span> 
-						<span class="table-data">&nbsp;=&nbsp;</span>	
-						<span class="table-data"><select name="attr_JumpMod" class="modtype" title="Jump Mod (default STR)">
-							  <option value="@{str|max}" selected>STR</option>
-							  <option value="@{dex|max}" data-i18n="dex">DEX</option>	
-							  <option value="@{con|max}" data-i18n="con">CON</option>
-							  <option value="@{int|max}" data-i18n="int">INT</option>
-							  <option value="@{wis|max}" data-i18n="wis">WIS</option>
-							  <option value="@{cha|max}" data-i18n="cha">CHA</option>
-							</select></span>
-						<span class="table-data skillsFeats"><input type="checkbox" value="5" name="attr_JumpFeat" title="Trained in Jump?" /></span> <!-- Skill Training -->
-						<span class="table-data skillsFeats"><input type="checkbox" value="5" name="attr_JumpFeat_max" title="Focused in Jump?" /></span> <!-- Skill Focus -->
-						<span class="table-data"><input type="number" name="attr_JumpMisc" title="Jump Miscellaneous Modifier" value="0" class="skills" /></span>
-					</div>
-				</div></div>
-				<div>		
-					<!-- Jump Notes -->	<input type="checkbox" class="sect-show hidden" value="1" name="attr_Skill-Jump-Show" />
-					<div class="table-row sect"><div class="table">
-						<div class="table-row">
-							<span class="table-data" style="min-width:50px">	</span>
-							<span class="table-data">	<input class="skillsNotes" type="text" name="attr_Jump_max" placeholder="Jump Notes" title="Jump Notes @{Jump|max}" />	</span>
-							<span class="table-data" style="min-width:15px">	</span>
-							<span class="table-data">	<b>Formula</b>	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="sect-show" title="Show/Hide Skill Template Formula_max" name="attr_Skill-Jump-Formula-show" value="1" style="opacity:0;width: 35px;height: 16px;position: relative;top: 5px;left: 6px;margin: -32px;cursor: pointer;z-index: 1;" /><span></span>	</span>							
-						</div>
-					</div>	</div>	
-					<!-- Jump Formula -->	<input type="checkbox" class="sect-show hidden" value="1" name="attr_Skill-Jump-Formula-Show" />	
-					<div class="table-row sect">	<div class="table">
-						<div class="table-row">
-							<span class="table-data" style="min-width:50px">	</span>
-							<span class="table-data skillFormula">
-								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
-								<input type="text" name="attr_JumpFormula" class="skillFormula" title="Skill Total formula @{JumpFormula}" value="@{nonlevel|max}[Half Level]+@{JumpMod}[Mod]+@{JumpFeat}[Training]+@{JumpFeat|max}[Focus]+@{ArmorType|max}[Armor Penalty]+@{EquipmentLoad}[Heavy Load]+@{JumpMisc}[Misc]+@{CT}[CT]" />				
-								<span class="small"><b>Template Formula</b></span>	<br />
-								<input type="text" name="attr_JumpFormula_max" class="skillFormula" title="Skill Template formula @{JumpFormula|max}" value="&{template:skill} {{name=Jump}} {{skill=[[1d20 + @{Jump}]]}} {{notes=@{Jump|max}}}" />
-							</span>
-						</div>
-					</div>	</div>
-				</div>	
 				
 				<div class="table-row"><div class="table">
 					<div class="table-row">
@@ -1408,49 +1365,7 @@
 						</div>
 					</div>	</div>
 				</div>
-				<div class="table-row"><div class="table">
-					<div class="table-row">
-						<span class="table-data skillsCol1">	<span>Swim</span>	
-							<input type="checkbox" class="sect-show skillsHideCheckbox" style="width: 35px; margin-left: -38px;" value="1" name="attr_Skill-Swim-Show" title="Show/Hide Swim Notes" /></span>
-						<span class="table-data"><button type="roll" name="roll_SwimCheck" value="@{SwimFormula|max}"></button></span>
-						<span class="table-data"><input type="number" name="attr_Swim" value="@{SwimFormula}" disabled="true" title="Swim Total @{Swim}" class="skills" /></span> 
-						<span class="table-data">&nbsp;=&nbsp;</span>	
-						<span class="table-data"><select name="attr_SwimMod" class="modtype" title="Swim Mod (default STR)">
-							  <option value="@{str|max}" selected>STR</option>
-							  <option value="@{dex|max}" data-i18n="dex">DEX</option>	
-							  <option value="@{con|max}" data-i18n="con">CON</option>
-							  <option value="@{int|max}" data-i18n="int">INT</option>
-							  <option value="@{wis|max}" data-i18n="wis">WIS</option>
-							  <option value="@{cha|max}" data-i18n="cha">CHA</option>
-							</select></span>
-						<span class="table-data skillsFeats"><input type="checkbox" value="5" name="attr_SwimFeat" title="Trained in Swim?" /></span> <!-- Skill Training -->
-						<span class="table-data skillsFeats"><input type="checkbox" value="5" name="attr_SwimFeat_max" title="Focused in Swim?" /></span> <!-- Skill Focus -->
-						<span class="table-data"><input type="number" name="attr_SwimMisc" title="Swim Miscellaneous Modifier" value="0" class="skills" /></span>
-					</div>
-				</div></div>
-				<div>		
-					<!-- Swim Notes -->	<input type="checkbox" class="sect-show hidden" value="1" name="attr_Skill-Swim-Show" />
-					<div class="table-row sect"><div class="table">
-						<div class="table-row">
-							<span class="table-data" style="min-width:50px">	</span>
-							<span class="table-data">	<input class="skillsNotes" type="text" name="attr_Swim_max" placeholder="Swim Notes" title="Swim Notes @{Swim|max}" />	</span>
-							<span class="table-data" style="min-width:15px">	</span>
-							<span class="table-data">	<b>Formula</b>	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="sect-show" title="Show/Hide Skill Template Formula_max" name="attr_Skill-Swim-Formula-show" value="1" style="opacity:0;width: 35px;height: 16px;position: relative;top: 5px;left: 6px;margin: -32px;cursor: pointer;z-index: 1;" /><span></span>	</span>							
-						</div>
-					</div>	</div>	
-					<!-- Swim Formula -->	<input type="checkbox" class="sect-show hidden" value="1" name="attr_Skill-Swim-Formula-Show" />	
-					<div class="table-row sect">	<div class="table">
-						<div class="table-row">
-							<span class="table-data" style="min-width:50px">	</span>
-							<span class="table-data skillFormula">							
-								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
-								<input type="text" name="attr_SwimFormula" class="skillFormula" title="Skill Total formula @{SwimFormula}" value="@{nonlevel|max}[Half Level]+@{SwimMod}[Mod]+@{SwimFeat}[Training]+@{SwimFeat|max}[Focus]+@{ArmorType|max}[Armor Penalty]+@{EquipmentLoad}[Heavy Load]+@{SwimMisc}[Misc]+@{CT}[CT]" /> 
-								<span class="small"><b>Template Formula</b></span>	<br />						
-								<input type="text" name="attr_SwimFormula_max" class="skillFormula" title="Skill Template formula @{SwimFormula|max}" value="&{template:skill} {{name=Swim}} {{skill=[[1d20 + @{Swim}]]}} {{notes=@{Swim|max}}}" />
-							</span>
-						</div>
-					</div>	</div>
-				</div>
+
 				<div class="table-row"><div class="table">
 					<div class="table-row">
 						<span class="table-data skillsCol1">	<span>Treat Injury</span>	
