@@ -184,6 +184,8 @@ select{
  
 /* ******** Start code for hiding sections ******* */
 .sheet-forceShow:not(:checked) ~ .sheet-forceBody,
+.sheet-athleticsShow:not(:checked) ~ .sheet-athleticsBody,
+.sheet-athleticsShow:checked ~ .sheet-rawskillsBody,
 .sheet-SRShow:not(:checked) ~ .sheet-SRBody,
 .sheet-DRShow:not(:checked) ~ .sheet-DRBody,
 .sheet-immuneShow:not(:checked) ~ .sheet-immuneBody,

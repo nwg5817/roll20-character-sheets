@@ -516,8 +516,51 @@
 							</span>
 						</div>
 					</div>	</div>
-				</div>					
-				<div class="table-row"><div class="table">
+				</div>
+				<input type="checkbox" class="athleticsShow hidden" value="1" name="attr_athletics-Show" />
+				<div class="table-row athleticsBody"><div class="table">
+					<div class="table-row">	
+					<span class="table-data skillsCol1">	<span>Athletics</span>	<input type="checkbox" class="sect-show skillsHideCheckbox" style="width: 85px; margin-left: -88px;" value="1" name="attr_Skill-Athletics-Show" title="Show/Hide Athletics Notes" /></span>
+					<span class="table-data"><button type="roll" name="roll_AthleticsCheck" value="@{AthleticsFormula|max}" title="Roll Athletics %{AthleticsCheck}"></button></span>
+					<span class="table-data"><input type="number" class="skills" name="attr_Athletics" value="@{AthleticsFormula}" disabled="true" title="Athletics Total @{Athletics}" /></span> 
+					<span class="table-data">&nbsp;=&nbsp;</span>	
+					<span class="table-data"><select name="attr_AthleticsMod" class="modtype" title="Athletics  Mod (default CHA)">
+						  <option value="@{str|max}" data-i18n="str" selected>STR</option>
+						  <option value="@{dex|max}" data-i18n="dex">DEX</option>	
+						  <option value="@{con|max}" data-i18n="con">CON</option>
+						  <option value="@{int|max}" data-i18n="int">INT</option>
+						  <option value="@{wis|max}" data-i18n="wis">WIS</option>
+						  <option value="@{cha|max}" data-i18n="cha">CHA</option>
+						</select></span>
+					<span class="table-data skillsFeats"><input type="checkbox" value="5" name="attr_AthleticsFeat" title="Trained in Athletics?" /></span> <!-- Skill Training -->
+					<span class="table-data skillsFeats"><input type="checkbox" value="5" name="attr_AthleticsFeat_max" title="Focused in Athletics?" /></span> <!-- Skill Focus -->
+					<span class="table-data"><input type="number" class="skills" name="attr_AthleticsMisc" title="Athletics Miscellaneous Modifier" value="0" />
+					</div>
+				</div>
+				<div>		
+					<!-- Athletics Notes -->	<input type="checkbox" class="sect-show hidden" value="1" name="attr_Skill-Athletics-Show" />
+					<div class="table-row sect"><div class="table">
+						<div class="table-row">
+							<span class="table-data" style="min-width:50px">	</span>
+							<span class="table-data">	<input class="skillsNotes" type="text" name="attr_Athletics_max" placeholder="Athletics Notes" title="Athletics Notes @{Athletics|max}" />	</span>
+							<span class="table-data" style="min-width:15px">	</span>
+							<span class="table-data">	<b>Formula</b>	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="sect-show" title="Show/Hide Skill Template Formula_max" name="attr_Skill-Athletics-Formula-show" value="1" style="opacity:0;width: 35px;height: 16px;position: relative;top: 5px;left: 6px;margin: -32px;cursor: pointer;z-index: 1;" /><span></span>	</span>							
+						</div>
+					</div>	</div>	
+					<!-- Athletics Formula -->	<input type="checkbox" class="sect-show hidden" value="1" name="attr_Skill-Athletics-Formula-Show" />	
+					<div class="table-row sect">	<div class="table">
+						<div class="table-row">
+							<span class="table-data" style="min-width:50px">	</span>
+							<span class="table-data skillFormula">							
+								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
+								<input type="text" name="attr_AthleticsFormula" class="skillFormula" title="Skill Total formula @{AthleticsFormula}" value="@{nonlevel|max}[Half Level]+@{AthleticsMod}[Mod]+@{AthleticsFeat}[Training]+@{AthleticsFeat|max}[Focus]+@{AthleticsMisc}[Misc]+@{CT}[CT]" /> 
+								<span class="small"><b>Template Formula</b></span>	<br />
+								<input type="text" name="attr_AthleticsFormula_max" class="skillFormula" title="Skill Template formula @{AthleticsFormula|max}" value="&{template:skill} {{name= Athletics}} {{skill=[[1d20 + @{Athletics} + @{rollmod_skill}[Other]]]}} {{notes=@{Athletics|max}}}" />
+							</span>
+						</div>
+					</div>	</div>
+				</div>	</div>					
+				<div class="table-row rawskillsBody"><div class="table">
 					<div class="table-row">
 						<span class="table-data skillsCol1">	<span>Climb</span>	
 							<input type="checkbox" class="sect-show skillsHideCheckbox" style="width: 37px;  margin-left: -40px;" value="1" name="attr_Skill-Climb-Show" title="Show/Hide Climb Notes" /></span>
@@ -732,7 +775,7 @@
 						</div>
 					</div>	</div>
 				</div>					
-				<div class="table-row"><div class="table">
+				<div class="table-row rawskillsBody"><div class="table">
 					<div class="table-row">
 						<span class="table-data skillsCol1">	<span>Jump</span>	
 							<input type="checkbox" class="sect-show skillsHideCheckbox" style="width: 48px;  margin-left: -48px;" value="1" name="attr_Skill-Jump-Show" title="Show/Hide Jump Notes" /></span>
@@ -1387,7 +1430,7 @@
 						</div>
 					</div>	</div>
 				</div>
-				<div class="table-row"><div class="table">
+				<div class="table-row rawskillsBody"><div class="table">
 					<div class="table-row">
 						<span class="table-data skillsCol1">	<span>Swim</span>	
 							<input type="checkbox" class="sect-show skillsHideCheckbox" style="width: 35px; margin-left: -38px;" value="1" name="attr_Skill-Swim-Show" title="Show/Hide Swim Notes" /></span>
@@ -1515,7 +1558,7 @@
 							</span>
 						</div>
 					</div>	</div>
-				</div>
+				</div>			
 				<input type="checkbox" class="forceShow hidden" value="1" name="attr_force-Show" />
 				<div class="table-row forceBody"><div class="table">
 					<div class="table-row">	
@@ -1748,7 +1791,7 @@
 			<div class="textHead2Col">Reveal Sections</div>
 				<label>Force</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="forceShow" value="1" name="attr_force-Show"  title="Force Sensitive character?"  style="opacity:0;width: 35px;height: 16px;position: relative;top: 5px;left: 6px;margin: -32px;cursor: pointer;z-index: 1;" /><span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<label>Droid</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="sect-show" value="1" name="attr_droid-Show"  title="Droid character?"  style="opacity:0;width: 35px;height: 16px;position: relative;top: 5px;left: 6px;margin: -32px;cursor: pointer;z-index: 1;" /><span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<label>Starship Maneuvers</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="sect-show" value="1" name="attr_StarshipManeuvers-Show"  title="Starship Maneuvers"  style="opacity:0;width: 35px;height: 16px;position: relative;top: 5px;left: 6px;margin: -32px;cursor: pointer;z-index: 1;" /><span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<label>Starship Maneuvers</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="sect-show" value="1" name="attr_StarshipManeuvers-Show"  title="Starship Maneuvers"  style="opacity:0;width: 35px;height: 16px;position: relative;top: 5px;left: 6px;margin: -32px;cursor: pointer;z-index: 1;" /><span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;				
 		</div>
 	</div>
 		<div class="clear"></div>
@@ -2830,14 +2873,19 @@
 			<table class="spacing">
 				<tr><div class="textHead2Col"><span data-i18n="Configuration">Configuration</span></div></tr>
 					<td rowspan="3" style="text-align:left">		
+						<span class="athleticsShow" title="Enable Athletics:">Enable Athletics:</span> <span class="block" title="Enable Athletics?"><input type="checkbox" value="1" name="attr_athletics-Show" title="Athletics Skill" /></span>
+					</td>							
+			</table>					
+			<table class="spacing">
+					<td rowspan="3" style="text-align:left">		
 						<span class="block" data-i18n="query-modifier">Query modifier for:</span> <span class="block" title="@{rollmod_attack}"><input type="checkbox" value="?{Other Modifiers|0}" name="attr_rollmod_attack" title="Attack Rolls" />Attack Rolls</span>	
 						<span class="block" title="@{rollmod_skill}"><input type="checkbox" value="?{Other Modifiers|0}" name="attr_rollmod_skill" title="Skill Rolls" />Skill Rolls</span>
-					</td>					
-						
-
+					</td>			
+			</table>			
 		</div>
 <div class="clear"></div>
 </div>
+<br/>
 
 <!-- start help section --> 
 <div> 
