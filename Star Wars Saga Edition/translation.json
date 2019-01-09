@@ -56,4 +56,6 @@
 "int":"INT",
 "wis":"WIS",
 "cha":"CHA",
+"Configuration":"Configuration",
+"query-modifier":"Enable Query Modifiers:",
 "flatfooted":"Flatfooted"}
