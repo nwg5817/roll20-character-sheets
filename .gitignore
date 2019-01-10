@@ -1,6 +1,10 @@
 #################
 ## Eclipse
 #################
+# Ignore everything in the root except the "wp-content" directory.
+/*
+!.gitignore
+!roll20-character-sheets/Star Wars Saga Edition/
 
 *.pydevproject
 .project
