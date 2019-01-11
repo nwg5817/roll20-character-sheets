@@ -1468,7 +1468,7 @@
 						  <option value="@{cha|max}" data-i18n="cha" selected>CHA</option>
 						</select></span>
 					<span class="table-data skillsFeats"><input type="checkbox" value="5" name="attr_UsetheForceFeat" title="Trained in Use the Force?" /></span> <!-- Skill Training -->
-					<span class="table-data skillsFeats"><input type="checkbox" value="5" name="attr_UsetheForceFeat_max" title="Focused in Use the Force?" /></span> <!-- Skill Focus -->
+					<span class="table-data skillsFeats"><input type="checkbox" value=@{level}+@{nonlevel}" name="attr_UsetheForceFeat_max" title="Focused in Use the Force?" /></span> <!-- Skill Focus -->
 					<span class="table-data"><input type="number" class="skills" name="attr_UsetheForceMisc" title="Use the Force Miscellaneous Modifier" value="0" />
 					</div>
 				</div>
@@ -1488,7 +1488,7 @@
 							<span class="table-data" style="min-width:50px">	</span>
 							<span class="table-data skillFormula">							
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
-								<input type="text" name="attr_UsetheForceFormula" class="skillFormula" title="Skill Total formula @{UsetheForceFormula}" value="@{nonlevel|max}[Half Level]+@{UsetheForceMod}[Mod]+@{UsetheForceFeat}[Training]+@{UsetheForceFeat|max}[Focus]+@{UsetheForceMisc}[Misc]+@{CT}[CT]" /> 
+								<input type="text" name="attr_UsetheForceFormula" class="skillFormula" title="Skill Total formula @{UsetheForceFormula}" value="@{UsetheForceMod}[Mod]+@{UsetheForceFeat}[Training]+@{UsetheForceFeat|max}[Focus]+@{UsetheForceMisc}[Misc]+@{CT}[CT]" /> 
 								<span class="small"><b>Template Formula</b></span>	<br />
 								<input type="text" name="attr_UsetheForceFormula_max" class="skillFormula" title="Skill Template formula @{UsetheForceFormula|max}" value="&{template:skill} {{name= Use the Force}} {{skill=[[1d20 + @{UsetheForce}]]}} {{notes=@{UsetheForce|max}}}" />
 							</span>
@@ -2359,7 +2359,7 @@
 						  <option value="@{cha|max}" data-i18n="cha" selected>CHA</option>
 						</select></span>
 					<span class="table-data skillsFeats"><input type="checkbox" value="5" name="attr_UsetheForceFeat" title="Trained in Use the Force?" /></span> <!-- Skill Training -->
-					<span class="table-data skillsFeats"><input type="checkbox" value="5" name="attr_UsetheForceFeat_max" title="Focused in Use the Force?" /></span> <!-- Skill Focus -->
+					<span class="table-data skillsFeats"><input type="checkbox" value="@{level}+@{nonlevel}" name="attr_UsetheForceFeat_max" title="Focused in Use the Force?" /></span> <!-- Skill Focus -->
 					<span class="table-data"><input type="number" class="skills" name="attr_UsetheForceMisc" title="Use the Force Miscellaneous Modifier" value="0" />
 					</div>
 				</div>
@@ -2379,7 +2379,7 @@
 							<span class="table-data" style="min-width:50px">	</span>
 							<span class="table-data atkFormula">							
 								<span class="small"><b>Skill Modifier Total Formula</b></span>	<br />
-								<textarea type="text" name="attr_UsetheForceFormula" class="atkFormula" title="Skill Total formula @{UsetheForceFormula}" >@{nonlevel|max}[Half Level]+@{UsetheForceMod}[Mod]+@{UsetheForceFeat}[Training]+@{UsetheForceFeat|max}[Focus]+@{UsetheForceMisc}[Misc]+@{CT}[CT]</textarea> 
+								<textarea type="text" name="attr_UsetheForceFormula" class="atkFormula" title="Skill Total formula @{UsetheForceFormula}" >[[(floor((@{level}+@{nonlevel}+@{UsetheForceFeat|max})/2))]][Level+Focus]+@{UsetheForceMod}[Mod]+@{UsetheForceFeat}[Training]+@{UsetheForceMisc}[Misc]+@{CT}[CT]</textarea> 
 								<span class="small"><b>Template Formula</b></span>	<br />
 								<textarea type="text" name="attr_UsetheForceFormula_max" class="atkFormula" title="Skill Template formula @{UsetheForceFormula|max}" >&{template:skill} {{name= Use the Force}} {{skill=[[1d20 + @{UsetheForce}]]}} {{notes=@{UsetheForce|max}}}</textarea> 
 							</span>
